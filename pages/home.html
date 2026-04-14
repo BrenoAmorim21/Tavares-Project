@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="WorkFinder — Explore projetos e oportunidades freelance disponíveis." />
   <title>Explorar Projetos — WorkFinder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/home.css" />
 </head>
+
 <body>
 
   <!-- ── Navbar ── -->
@@ -20,13 +24,16 @@
 
     <div class="nav-search">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z"/>
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z" />
       </svg>
       <input type="text" id="search-input" placeholder="Buscar projetos, habilidades..." />
     </div>
 
     <div class="nav-actions">
       <button class="btn-nav btn-nav-ghost" onclick="window.location.href='perfil-freelancer.html'">Meu Perfil</button>
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='propostas.html'">Minhas Propostas</button>
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='contratos.html'">Contratos</button>
       <div class="avatar" onclick="window.location.href='perfil-freelancer.html'" title="Ver perfil">MV</div>
     </div>
   </nav>
@@ -162,6 +169,8 @@
     </main>
   </div>
 
+  <script src="../assets/js/api.js"></script>
   <script src="../assets/js/home.js"></script>
 </body>
+
 </html>

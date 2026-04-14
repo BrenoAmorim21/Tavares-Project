@@ -1,97 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="WorkFinder — Dashboard da empresa: gerencie seus projetos e veja as propostas recebidas." />
+  <meta name="description"
+    content="WorkFinder — Dashboard da empresa: gerencie seus projetos e veja as propostas recebidas." />
   <title>Dashboard Empresa — WorkFinder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/dash_empresa.css" />
 </head>
+
 <body>
 
-<nav class="navbar">
-  <a href="#" class="nav-brand">
-    <div class="nav-logo">WF</div>
-    WorkFinder
-  </a>
-  <div class="nav-actions">
-    <button class="btn-nav btn-nav-ghost" onclick="location.href='perfil_empresa.html'">Perfil da Empresa</button>
-    <button class="btn-nav btn-nav-primary" onclick="location.href='pub_vaga.html'">+ Publicar projeto</button>
-    <div class="avatar" title="Lojafy Soluções">LS</div>
-    <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <div class="nav-logo">WF</div>
+      WorkFinder
+    </a>
+    <div class="nav-actions">
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='perfil_empresa.html'">Perfil da Empresa</button>
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='contratos.html'">Contratos</button>
+      <button class="btn-nav btn-nav-primary" onclick="location.href='pub_vaga.html'">+ Publicar projeto</button>
+      <div class="avatar" title="Lojafy Soluções">LS</div>
+      <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div>
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Bem-vinda, <strong id="nome-empresa">Lojafy Soluções</strong> 👋</div>
+      </div>
+      <button class="btn-primary" onclick="location.href='pub_vaga.html'">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        Publicar novo projeto
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#EBF2FF">📋</div>
+        <div class="stat-num" id="stat-total">3</div>
+        <div class="stat-label">Projetos publicados</div>
+        <div class="stat-delta delta-up">↑ 1 este mês</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#D1FAE5">✅</div>
+        <div class="stat-num" style="color:var(--green)" id="stat-abertos">2</div>
+        <div class="stat-label">Projetos abertos</div>
+        <div class="stat-delta delta-up">Recebendo propostas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#FEF3C7">👥</div>
+        <div class="stat-num" style="color:var(--amber)" id="stat-propostas">14</div>
+        <div class="stat-label">Propostas recebidas</div>
+        <div class="stat-delta delta-up">↑ 5 esta semana</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#EDE9FE">🤝</div>
+        <div class="stat-num" style="color:var(--purple)" id="stat-contratados">1</div>
+        <div class="stat-label">Freelancers contratados</div>
+        <div class="stat-delta">Projeto em andamento</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active" onclick="setTab(this,'todos')">Todos (3)</div>
+      <div class="tab" onclick="setTab(this,'aberta')">Abertos (2)</div>
+      <div class="tab" onclick="setTab(this,'pausada')">Pausados (0)</div>
+      <div class="tab" onclick="setTab(this,'fechada')">Fechados (1)</div>
+    </div>
+
+    <!-- Lista de projetos -->
+    <div class="job-list" id="job-list"></div>
+
   </div>
-</nav>
 
-<div class="page-wrap">
-
-  <!-- Header -->
-  <div class="page-header">
-    <div>
-      <div class="page-title">Dashboard</div>
-      <div class="page-sub">Bem-vinda, <strong id="nome-empresa">Lojafy Soluções</strong> 👋</div>
-    </div>
-    <button class="btn-primary" onclick="location.href='pub_vaga.html'">
-      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-      </svg>
-      Publicar novo projeto
-    </button>
-  </div>
-
-  <!-- Stats -->
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-icon" style="background:#EBF2FF">📋</div>
-      <div class="stat-num" id="stat-total">3</div>
-      <div class="stat-label">Projetos publicados</div>
-      <div class="stat-delta delta-up">↑ 1 este mês</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon" style="background:#D1FAE5">✅</div>
-      <div class="stat-num" style="color:var(--green)" id="stat-abertos">2</div>
-      <div class="stat-label">Projetos abertos</div>
-      <div class="stat-delta delta-up">Recebendo propostas</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon" style="background:#FEF3C7">👥</div>
-      <div class="stat-num" style="color:var(--amber)" id="stat-propostas">14</div>
-      <div class="stat-label">Propostas recebidas</div>
-      <div class="stat-delta delta-up">↑ 5 esta semana</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon" style="background:#EDE9FE">🤝</div>
-      <div class="stat-num" style="color:var(--purple)" id="stat-contratados">1</div>
-      <div class="stat-label">Freelancers contratados</div>
-      <div class="stat-delta">Projeto em andamento</div>
+  <!-- Modal candidatos -->
+  <div class="modal-overlay" id="modal-cand" onclick="fecharModalFora(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-cand-titulo">Candidatos</div>
+        <button class="btn-close" onclick="fecharModal('modal-cand')">✕</button>
+      </div>
+      <div id="modal-cand-lista"></div>
     </div>
   </div>
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <div class="tab active" onclick="setTab(this,'todos')">Todos (3)</div>
-    <div class="tab" onclick="setTab(this,'aberta')">Abertos (2)</div>
-    <div class="tab" onclick="setTab(this,'pausada')">Pausados (0)</div>
-    <div class="tab" onclick="setTab(this,'fechada')">Fechados (1)</div>
-  </div>
-
-  <!-- Lista de projetos -->
-  <div class="job-list" id="job-list"></div>
-
-</div>
-
-<!-- Modal candidatos -->
-<div class="modal-overlay" id="modal-cand" onclick="fecharModalFora(event)">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="modal-cand-titulo">Candidatos</div>
-      <button class="btn-close" onclick="fecharModal('modal-cand')">✕</button>
-    </div>
-    <div id="modal-cand-lista"></div>
-  </div>
-</div>
-
-<script src="../assets/js/dash_empresa.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/dash_empresa.js"></script>
 </body>
+
 </html>

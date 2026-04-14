@@ -1,218 +1,237 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="WorkFinder — Veja os detalhes da vaga e envie sua proposta." />
   <title>Detalhe da Vaga — WorkFinder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/detal_vaga.css" />
 </head>
+
 <body>
 
-<nav class="navbar">
-  <a href="home.html" class="nav-brand">
-    <div class="nav-logo">WF</div>
-    WorkFinder
-  </a>
-  <button class="btn-nav btn-nav-ghost" onclick="location.href='home.html'">← Explorar projetos</button>
-</nav>
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <div class="nav-logo">WF</div>
+      WorkFinder
+    </a>
+    <button class="btn-nav btn-nav-ghost" onclick="location.href='home.html'">← Explorar projetos</button>
+  </nav>
 
-<!-- Breadcrumb -->
-<div class="breadcrumb">
-  <a href="home.html">Projetos</a>
-  <span>›</span>
-  <span>Desenvolvimento Web</span>
-  <span>›</span>
-  <span>Desenvolvimento de plataforma e-commerce</span>
-</div>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="home.html">Projetos</a>
+    <span>›</span>
+    <span>Desenvolvimento Web</span>
+    <span>›</span>
+    <span>Desenvolvimento de plataforma e-commerce</span>
+  </div>
 
-<!-- Layout -->
-<div class="layout">
+  <!-- Layout -->
+  <div class="layout">
 
-  <!-- Coluna principal -->
-  <div>
+    <!-- Coluna principal -->
+    <div>
 
-    <!-- Header da vaga -->
-    <div class="section">
-      <div class="job-header">
-        <div class="company-logo" style="background:#EBF2FF;color:#1A56DB">LJ</div>
-        <div class="job-header-info">
-          <h1 class="job-title-main">Desenvolvimento de plataforma e-commerce em React + Node</h1>
-          <div class="company-link" onclick="location.href='perfil_empresa.html'">Lojafy Soluções ✓</div>
+      <!-- Header da vaga -->
+      <div class="section">
+        <div class="job-header">
+          <div class="company-logo" style="background:#EBF2FF;color:#1A56DB">LJ</div>
+          <div class="job-header-info">
+            <h1 class="job-title-main">Desenvolvimento de plataforma e-commerce em React + Node</h1>
+            <div class="company-link" onclick="location.href='perfil_empresa.html'">Lojafy Soluções ✓</div>
+          </div>
+        </div>
+
+        <div class="badges-row">
+          <span class="badge badge-aberta">Aberta</span>
+          <span class="badge badge-remoto">Remoto</span>
+          <span class="badge" style="background:var(--surface);color:var(--ink-mid)">Projeto pontual</span>
+          <span class="badge" style="background:var(--surface);color:var(--ink-mid)">Desenvolvimento Web</span>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-cell">
+            <span class="meta-key">Orçamento</span>
+            <span class="meta-val green">R$ 18.000 – R$ 25.000</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-key">Prazo</span>
+            <span class="meta-val">60 dias</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-key">Propostas recebidas</span>
+            <span class="meta-val">7 propostas</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-key">Publicado</span>
+            <span class="meta-val">há 2 dias</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-key">Nível desejado</span>
+            <span class="meta-val">Pleno / Sênior</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-key">Limite para propostas</span>
+            <span class="meta-val">20/04/2025</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="desc-title">Habilidades desejadas</div>
+          <div class="tags">
+            <span class="tag highlight">React</span>
+            <span class="tag highlight">Node.js</span>
+            <span class="tag highlight">MySQL</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">REST API</span>
+            <span class="tag">Git</span>
+          </div>
         </div>
       </div>
 
-      <div class="badges-row">
-        <span class="badge badge-aberta">Aberta</span>
-        <span class="badge badge-remoto">Remoto</span>
-        <span class="badge" style="background:var(--surface);color:var(--ink-mid)">Projeto pontual</span>
-        <span class="badge" style="background:var(--surface);color:var(--ink-mid)">Desenvolvimento Web</span>
+      <!-- Descrição completa -->
+      <div class="section">
+        <div class="desc-title" style="font-size:1rem;margin-bottom:1rem">Sobre o projeto</div>
+        <div class="desc-body">Precisamos de um desenvolvedor full-stack para criar do zero nossa plataforma de
+          e-commerce. O projeto é voltado para pequenas e médias empresas do varejo que querem vender online com uma
+          experiência profissional.
+
+          <strong>O que precisa ser desenvolvido:</strong>
+
+          • Catálogo de produtos com categorias, filtros e busca
+          • Carrinho de compras e fluxo de checkout completo
+          • Integração com gateway de pagamento (Stripe ou PagSeguro)
+          • Painel administrativo para gestão de produtos, pedidos e clientes
+          • Autenticação de usuários (login, cadastro, recuperação de senha)
+          • Dashboard com métricas de vendas
+
+          <strong>Stack esperada:</strong>
+
+          • Frontend: React com TypeScript
+          • Backend: Node.js com Express
+          • Banco de dados: MySQL
+          • Pagamentos: Stripe
+
+          <strong>O que esperamos do freelancer:</strong>
+
+          Buscamos alguém organizado, que entregue código limpo, documente o que for feito e mantenha comunicação ativa
+          durante o projeto. Fazemos reuniões semanais de acompanhamento via Google Meet.
+
+          <strong>Entregáveis:</strong>
+
+          • Código-fonte completo no GitHub
+          • Deploy funcional (pode ser VPS, Railway ou similar)
+          • Documentação básica de uso e API
+          • Período de 15 dias para suporte pós-entrega
+        </div>
       </div>
 
-      <div class="meta-grid">
-        <div class="meta-cell">
-          <span class="meta-key">Orçamento</span>
-          <span class="meta-val green">R$ 18.000 – R$ 25.000</span>
+      <!-- Sobre a empresa -->
+      <div class="section">
+        <div class="desc-title" style="font-size:1rem;margin-bottom:.9rem">Sobre a Lojafy Soluções</div>
+        <div class="desc-body">A Lojafy é uma startup focada em criar soluções digitais para varejistas que querem
+          crescer online. Fundada em 2021, já ajudamos mais de 50 empresas a digitalizar suas operações.
+
+          Temos um time enxuto e valorizamos muito a parceria com freelancers especializados para projetos pontuais.
         </div>
-        <div class="meta-cell">
-          <span class="meta-key">Prazo</span>
-          <span class="meta-val">60 dias</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-key">Propostas recebidas</span>
-          <span class="meta-val">7 propostas</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-key">Publicado</span>
-          <span class="meta-val">há 2 dias</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-key">Nível desejado</span>
-          <span class="meta-val">Pleno / Sênior</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-key">Limite para propostas</span>
-          <span class="meta-val">20/04/2025</span>
+        <div style="margin-top:.9rem">
+          <span class="badge badge-aberta" style="font-size:.72rem">✓ Empresa verificada</span>
+          <span style="margin-left:.75rem;font-size:.8rem;color:var(--ink-light)">⭐ 4.8 · 4 contratações
+            anteriores</span>
         </div>
       </div>
 
-      <div>
-        <div class="desc-title">Habilidades desejadas</div>
-        <div class="tags">
-          <span class="tag highlight">React</span>
-          <span class="tag highlight">Node.js</span>
-          <span class="tag highlight">MySQL</span>
-          <span class="tag">Stripe</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">REST API</span>
-          <span class="tag">Git</span>
-        </div>
-      </div>
     </div>
 
-    <!-- Descrição completa -->
-    <div class="section">
-      <div class="desc-title" style="font-size:1rem;margin-bottom:1rem">Sobre o projeto</div>
-      <div class="desc-body">Precisamos de um desenvolvedor full-stack para criar do zero nossa plataforma de e-commerce. O projeto é voltado para pequenas e médias empresas do varejo que querem vender online com uma experiência profissional.
+    <!-- Sidebar -->
+    <aside>
 
-<strong>O que precisa ser desenvolvido:</strong>
+      <!-- Card enviar proposta -->
+      <div class="proposta-card">
+        <div class="proposta-title">Enviar proposta</div>
 
-• Catálogo de produtos com categorias, filtros e busca
-• Carrinho de compras e fluxo de checkout completo
-• Integração com gateway de pagamento (Stripe ou PagSeguro)
-• Painel administrativo para gestão de produtos, pedidos e clientes
-• Autenticação de usuários (login, cadastro, recuperação de senha)
-• Dashboard com métricas de vendas
+        <div class="propostas-info">
+          <strong>7 freelancers</strong> já enviaram propostas para este projeto
+        </div>
 
-<strong>Stack esperada:</strong>
+        <!-- Formulário -->
+        <div id="form-proposta">
+          <div class="form-group">
+            <label>Valor da sua proposta (R$)</label>
+            <input type="number" id="inp-valor" placeholder="Ex: 20000" min="0" />
+            <div class="form-hint">Faixa estimada: R$ 18.000 – R$ 25.000</div>
+          </div>
 
-• Frontend: React com TypeScript
-• Backend: Node.js com Express
-• Banco de dados: MySQL
-• Pagamentos: Stripe
+          <div class="form-group">
+            <label>Prazo que você consegue entregar</label>
+            <select id="inp-prazo-prop">
+              <option value="">Selecione...</option>
+              <option>Em 30 dias</option>
+              <option>Em 45 dias</option>
+              <option>Em 60 dias</option>
+              <option>Em 90 dias</option>
+              <option>Mais de 90 dias</option>
+            </select>
+          </div>
 
-<strong>O que esperamos do freelancer:</strong>
+          <div class="form-group">
+            <label>Mensagem para a empresa</label>
+            <textarea id="inp-msg" rows="5"
+              placeholder="Apresente-se, fale sobre sua experiência relevante e por que você é a melhor escolha para este projeto..."></textarea>
+            <div class="form-hint">Mensagens personalizadas aumentam muito a chance de aceite.</div>
+          </div>
 
-Buscamos alguém organizado, que entregue código limpo, documente o que for feito e mantenha comunicação ativa durante o projeto. Fazemos reuniões semanais de acompanhamento via Google Meet.
+          <button class="btn-send" onclick="enviarProposta()">
+            🚀 Enviar proposta
+          </button>
 
-<strong>Entregáveis:</strong>
+          <button class="btn-save-job" onclick="salvarVaga(this)">
+            🔖 Salvar para depois
+          </button>
+        </div>
 
-• Código-fonte completo no GitHub
-• Deploy funcional (pode ser VPS, Railway ou similar)
-• Documentação básica de uso e API
-• Período de 15 dias para suporte pós-entrega</div>
-    </div>
-
-    <!-- Sobre a empresa -->
-    <div class="section">
-      <div class="desc-title" style="font-size:1rem;margin-bottom:.9rem">Sobre a Lojafy Soluções</div>
-      <div class="desc-body">A Lojafy é uma startup focada em criar soluções digitais para varejistas que querem crescer online. Fundada em 2021, já ajudamos mais de 50 empresas a digitalizar suas operações.
-
-Temos um time enxuto e valorizamos muito a parceria com freelancers especializados para projetos pontuais.</div>
-      <div style="margin-top:.9rem">
-        <span class="badge badge-aberta" style="font-size:.72rem">✓ Empresa verificada</span>
-        <span style="margin-left:.75rem;font-size:.8rem;color:var(--ink-light)">⭐ 4.8 · 4 contratações anteriores</span>
+        <!-- Mensagem de sucesso -->
+        <div class="success-msg" id="success-prop">
+          <p>✅ Proposta enviada com sucesso!<br><br>
+            A empresa será notificada. Fique de olho nas suas notificações.</p>
+          <button class="btn-save-job" style="margin-top:.75rem" onclick="location.href='home.html'">← Voltar aos
+            projetos</button>
+        </div>
       </div>
-    </div>
+
+      <!-- Card empresa resumo -->
+      <div class="company-card">
+        <div class="company-card-header">
+          <div class="clogo" style="background:#EBF2FF;color:#1A56DB">LJ</div>
+          <div>
+            <div class="cname">Lojafy Soluções</div>
+            <div class="csub">São Paulo, SP · Tecnologia</div>
+          </div>
+        </div>
+        <div class="cstat-row"><span class="cstat-label">Projetos publicados</span><span class="cstat-val">3</span>
+        </div>
+        <div class="cstat-row"><span class="cstat-label">Contratações feitas</span><span class="cstat-val">4</span>
+        </div>
+        <div class="cstat-row"><span class="cstat-label">Avaliação</span><span class="cstat-val">⭐ 4.8</span></div>
+        <div class="cstat-row"><span class="cstat-label">Membro desde</span><span class="cstat-val">Jan 2025</span>
+        </div>
+        <button class="btn-save-job" style="margin-top:.85rem" onclick="location.href='perfil_empresa.html'">Ver perfil
+          da empresa</button>
+      </div>
+
+    </aside>
 
   </div>
 
-  <!-- Sidebar -->
-  <aside>
-
-    <!-- Card enviar proposta -->
-    <div class="proposta-card">
-      <div class="proposta-title">Enviar proposta</div>
-
-      <div class="propostas-info">
-        <strong>7 freelancers</strong> já enviaram propostas para este projeto
-      </div>
-
-      <!-- Formulário -->
-      <div id="form-proposta">
-        <div class="form-group">
-          <label>Valor da sua proposta (R$)</label>
-          <input type="number" id="inp-valor" placeholder="Ex: 20000" min="0" />
-          <div class="form-hint">Faixa estimada: R$ 18.000 – R$ 25.000</div>
-        </div>
-
-        <div class="form-group">
-          <label>Prazo que você consegue entregar</label>
-          <select id="inp-prazo-prop">
-            <option value="">Selecione...</option>
-            <option>Em 30 dias</option>
-            <option>Em 45 dias</option>
-            <option>Em 60 dias</option>
-            <option>Em 90 dias</option>
-            <option>Mais de 90 dias</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Mensagem para a empresa</label>
-          <textarea id="inp-msg" rows="5" placeholder="Apresente-se, fale sobre sua experiência relevante e por que você é a melhor escolha para este projeto..."></textarea>
-          <div class="form-hint">Mensagens personalizadas aumentam muito a chance de aceite.</div>
-        </div>
-
-        <button class="btn-send" onclick="enviarProposta()">
-          🚀 Enviar proposta
-        </button>
-
-        <button class="btn-save-job" onclick="salvarVaga(this)">
-          🔖 Salvar para depois
-        </button>
-      </div>
-
-      <!-- Mensagem de sucesso -->
-      <div class="success-msg" id="success-prop">
-        <p>✅ Proposta enviada com sucesso!<br><br>
-        A empresa será notificada. Fique de olho nas suas notificações.</p>
-        <button class="btn-save-job" style="margin-top:.75rem" onclick="location.href='home.html'">← Voltar aos projetos</button>
-      </div>
-    </div>
-
-    <!-- Card empresa resumo -->
-    <div class="company-card">
-      <div class="company-card-header">
-        <div class="clogo" style="background:#EBF2FF;color:#1A56DB">LJ</div>
-        <div>
-          <div class="cname">Lojafy Soluções</div>
-          <div class="csub">São Paulo, SP · Tecnologia</div>
-        </div>
-      </div>
-      <div class="cstat-row"><span class="cstat-label">Projetos publicados</span><span class="cstat-val">3</span></div>
-      <div class="cstat-row"><span class="cstat-label">Contratações feitas</span><span class="cstat-val">4</span></div>
-      <div class="cstat-row"><span class="cstat-label">Avaliação</span><span class="cstat-val">⭐ 4.8</span></div>
-      <div class="cstat-row"><span class="cstat-label">Membro desde</span><span class="cstat-val">Jan 2025</span></div>
-      <button class="btn-save-job" style="margin-top:.85rem" onclick="location.href='perfil_empresa.html'">Ver perfil da empresa</button>
-    </div>
-
-  </aside>
-
-</div>
-
-<script src="../assets/js/detal_vaga.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/detal_vaga.js"></script>
 </body>
+
 </html>

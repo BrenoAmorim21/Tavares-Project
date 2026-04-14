@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="WorkFinder — Publique um novo projeto e encontre o freelancer ideal para sua empresa." />
+  <meta name="description"
+    content="WorkFinder — Publique um novo projeto e encontre o freelancer ideal para sua empresa." />
   <title>Publicar Projeto — WorkFinder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/pub_vaga.css" />
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -99,7 +104,8 @@
               <div class="modal-opt-label">Híbrido</div>
               <div class="modal-opt-desc">Remoto + presencial</div>
             </button>
-            <button type="button" class="modal-opt" data-modalidade="presencial" onclick="selecionarModalidade('presencial')">
+            <button type="button" class="modal-opt" data-modalidade="presencial"
+              onclick="selecionarModalidade('presencial')">
               <div class="modal-opt-icon">🏢</div>
               <div class="modal-opt-label">Presencial</div>
               <div class="modal-opt-desc">No escritório</div>
@@ -150,7 +156,8 @@
 
         <div class="form-group">
           <label for="inp-desc">Descreva o projeto em detalhes *</label>
-          <textarea id="inp-desc" rows="7" placeholder="Descreva o que precisa ser feito, as tecnologias envolvidas, o que você espera do freelancer e quais serão os entregáveis..."></textarea>
+          <textarea id="inp-desc" rows="7"
+            placeholder="Descreva o que precisa ser feito, as tecnologias envolvidas, o que você espera do freelancer e quais serão os entregáveis..."></textarea>
           <div class="form-hint">Quanto mais detalhes, melhores serão as propostas que você receberá</div>
         </div>
 
@@ -169,7 +176,8 @@
         <div class="preview-card">
           <div class="preview-title">👁 Prévia do anúncio</div>
           <div id="preview-content">
-            <div class="preview-job-title" style="color:var(--ink-light)">Preencha o formulário para ver a prévia...</div>
+            <div class="preview-job-title" style="color:var(--ink-light)">Preencha o formulário para ver a prévia...
+            </div>
           </div>
         </div>
 
@@ -203,6 +211,8 @@
 
   </div>
 
+  <script src="../assets/js/api.js"></script>
   <script src="../assets/js/pub_vaga.js"></script>
 </body>
+
 </html>

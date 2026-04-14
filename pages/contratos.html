@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meus Contratos — WorkFinder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <style>
+        :root {
+            --brand: #1A56DB;
+            --brand-soft: #EBF2FF;
+            --brand-dark: #1039A0;
+            --green: #059669;
+            --green-soft: #D1FAE5;
+            --amber: #D97706;
+            --amber-soft: #FEF3C7;
+            --red: #DC2626;
+            --red-soft: #FEE2E2;
+            --purple: #6D28D9;
+            --purple-soft: #EDE9FE;
+            --ink: #0E1726;
+            --ink-mid: #4A5568;
+            --ink-light: #718096;
+            --border: #E2E8F0;
+            --surface: #F7F9FC;
+            --white: #fff;
+            --font: 'DM Sans', sans-serif
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--surface);
+            color: var(--ink);
+            min-height: 100vh
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            font-weight: 600;
+            font-size: 1.1rem
+        }
+
+        .nav-logo {
+            width: 32px;
+            height: 32px;
+            background: var(--brand);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .78rem;
+            font-weight: 700
+        }
+
+        .btn-nav {
+            padding: .42rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: .875rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: .18s
+        }
+
+        .btn-nav-ghost {
+            background: none;
+            color: var(--ink-mid)
+        }
+
+        .btn-nav-ghost:hover {
+            background: var(--surface)
+        }
+
+        .btn-nav-danger {
+            background: none;
+            color: var(--red)
+        }
+
+        .btn-nav-danger:hover {
+            background: var(--red-soft)
+        }
+
+        .page-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: .25rem
+        }
+
+        .page-sub {
+            font-size: .9rem;
+            color: var(--ink-mid);
+            margin-bottom: 2rem
+        }
+
+        /* Banner contrato ativo — destaque visual */
+        .contrato-ativo-banner {
+            background: linear-gradient(135deg, #0E1726 0%, #1B3A6C 60%, #1A56DB 100%);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            display: none
+        }
+
+        .contrato-ativo-banner.show {
+            display: block
+        }
+
+        .contrato-ativo-banner::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, .1) 0%, transparent 70%);
+            top: -100px;
+            right: -50px;
+            pointer-events: none
+        }
+
+        .banner-eyebrow {
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #93C5FD;
+            margin-bottom: .5rem
+        }
+
+        .banner-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: .4rem
+        }
+
+        .banner-empresa {
+            font-size: .9rem;
+            color: #94A3B8;
+            margin-bottom: 1.25rem
+        }
+
+        .banner-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap
+        }
+
+        .banner-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: .1rem
+        }
+
+        .banner-meta-key {
+            font-size: .7rem;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: #64748B
+        }
+
+        .banner-meta-val {
+            font-size: .95rem;
+            font-weight: 600;
+            color: #fff
+        }
+
+        .banner-actions {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            gap: .6rem
+        }
+
+        .btn-banner {
+            padding: .45rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: .825rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: .18s
+        }
+
+        .btn-banner-green {
+            background: var(--green);
+            color: #fff
+        }
+
+        .btn-banner-green:hover {
+            background: #047857
+        }
+
+        .btn-banner-ghost {
+            background: rgba(255, 255, 255, .15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .25)
+        }
+
+        .btn-banner-ghost:hover {
+            background: rgba(255, 255, 255, .25)
+        }
+
+        .pulse-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            background: rgba(5, 150, 105, .25);
+            border: 1px solid rgba(5, 150, 105, .4);
+            color: #6EE7B7;
+            padding: .3rem .85rem;
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 600;
+            margin-bottom: .75rem
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #34D399;
+            animation: pulse 2s infinite
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .35
+            }
+        }
+
+        /* Lista de contratos */
+        .section-label {
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            margin-bottom: .85rem
+        }
+
+        .contratos-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem
+        }
+
+        .contrato-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.4rem;
+            transition: .2s;
+            animation: fadeUp .3s ease both
+        }
+
+        .contrato-card:hover {
+            box-shadow: 0 4px 16px rgba(14, 23, 38, .08)
+        }
+
+        .contrato-card.em_andamento {
+            border-left: 3px solid var(--brand)
+        }
+
+        .contrato-card.concluido {
+            border-left: 3px solid var(--green)
+        }
+
+        .contrato-card.cancelado {
+            border-left: 3px solid var(--border);
+            opacity: .7
+        }
+
+        .ct-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: .75rem
+        }
+
+        .ct-titulo {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: .2rem
+        }
+
+        .ct-parceiro {
+            font-size: .83rem;
+            color: var(--ink-mid)
+        }
+
+        .badge {
+            font-size: .7rem;
+            font-weight: 600;
+            padding: .22rem .65rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: .3px;
+            white-space: nowrap
+        }
+
+        .badge-andamento {
+            background: var(--brand-soft);
+            color: var(--brand)
+        }
+
+        .badge-concluido {
+            background: var(--green-soft);
+            color: var(--green)
+        }
+
+        .badge-cancelado {
+            background: var(--surface);
+            color: var(--ink-light)
+        }
+
+        .ct-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem
+        }
+
+        .ct-meta-item {
+            font-size: .82rem;
+            color: var(--ink-mid)
+        }
+
+        .ct-meta-item strong {
+            color: var(--ink)
+        }
+
+        .ct-actions {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap
+        }
+
+        .btn-ct {
+            padding: .45rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: .825rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: .18s
+        }
+
+        .btn-ct-primary {
+            background: var(--brand);
+            color: #fff
+        }
+
+        .btn-ct-primary:hover {
+            background: var(--brand-dark)
+        }
+
+        .btn-ct-green {
+            background: var(--green);
+            color: #fff
+        }
+
+        .btn-ct-green:hover {
+            background: #047857
+        }
+
+        .btn-ct-outline {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            color: var(--ink-mid)
+        }
+
+        .btn-ct-outline:hover {
+            border-color: var(--brand);
+            color: var(--brand)
+        }
+
+        /* Modal avaliação */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(14, 23, 38, .45);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 14px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 8px 32px rgba(14, 23, 38, .15);
+            transform: translateY(20px);
+            transition: transform .25s
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0)
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: .35rem
+        }
+
+        .modal-sub {
+            font-size: .875rem;
+            color: var(--ink-mid);
+            margin-bottom: 1.25rem
+        }
+
+        .estrelas {
+            display: flex;
+            gap: .4rem;
+            margin-bottom: 1.25rem
+        }
+
+        .estrela {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform .15s;
+            user-select: none;
+            filter: grayscale(1);
+            opacity: .5
+        }
+
+        .estrela.on {
+            filter: none;
+            opacity: 1
+        }
+
+        .estrela:hover {
+            transform: scale(1.2)
+        }
+
+        .form-group {
+            margin-bottom: 1rem
+        }
+
+        .form-group label {
+            display: block;
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--ink-mid);
+            margin-bottom: .4rem
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: .65rem .9rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: .9rem;
+            color: var(--ink);
+            outline: none;
+            resize: vertical;
+            transition: border-color .2s
+        }
+
+        .form-group textarea:focus {
+            border-color: var(--brand)
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: .6rem;
+            margin-top: 1.25rem
+        }
+
+        .btn-cancel {
+            padding: .55rem 1.1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            background: #fff;
+            font-family: var(--font);
+            font-size: .875rem;
+            cursor: pointer;
+            color: var(--ink-mid)
+        }
+
+        .btn-enviar {
+            padding: .55rem 1.3rem;
+            background: var(--brand);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: .875rem;
+            font-weight: 500;
+            cursor: pointer
+        }
+
+        .btn-enviar:hover {
+            background: var(--brand-dark)
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--ink-light)
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: .5rem
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .contrato-card:nth-child(1) {
+            animation-delay: .04s
+        }
+
+        .contrato-card:nth-child(2) {
+            animation-delay: .08s
+        }
+
+        .contrato-card:nth-child(3) {
+            animation-delay: .12s
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="nav-brand" id="nav-home-link">
+            <div class="nav-logo">WF</div>WorkFinder
+        </a>
+        <div style="display:flex;gap:.75rem;align-items:center">
+            <button class="btn-nav btn-nav-ghost" id="btn-voltar" onclick="history.back()">← Voltar</button>
+            <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
+        </div>
+    </nav>
+
+    <div class="page-wrap">
+        <div class="page-title">Meus Contratos</div>
+        <div class="page-sub">Acompanhe projetos em andamento e histórico de contratos</div>
+
+        <!-- Banner contrato ativo (destaque) -->
+        <div class="contrato-ativo-banner" id="banner-ativo">
+            <div class="banner-eyebrow">⚡ Contrato em andamento</div>
+            <div class="pulse-badge"><span class="pulse-dot"></span>Projeto ativo</div>
+            <div class="banner-title" id="banner-titulo">–</div>
+            <div class="banner-empresa" id="banner-empresa">–</div>
+            <div class="banner-meta">
+                <div class="banner-meta-item">
+                    <span class="banner-meta-key">Valor</span>
+                    <span class="banner-meta-val" id="banner-valor">–</span>
+                </div>
+                <div class="banner-meta-item">
+                    <span class="banner-meta-key">Prazo</span>
+                    <span class="banner-meta-val" id="banner-prazo">–</span>
+                </div>
+                <div class="banner-meta-item">
+                    <span class="banner-meta-key">Iniciado em</span>
+                    <span class="banner-meta-val" id="banner-inicio">–</span>
+                </div>
+            </div>
+            <div class="banner-actions" id="banner-actions"></div>
+        </div>
+
+        <!-- Contratos em andamento -->
+        <div id="secao-andamento" style="display:none">
+            <div class="section-label">Em andamento</div>
+            <div class="contratos-grid" id="lista-andamento"></div>
+        </div>
+
+        <!-- Contratos concluídos -->
+        <div id="secao-concluidos" style="display:none">
+            <div class="section-label">Concluídos</div>
+            <div class="contratos-grid" id="lista-concluidos"></div>
+        </div>
+
+        <!-- Cancelados -->
+        <div id="secao-cancelados" style="display:none">
+            <div class="section-label">Cancelados</div>
+            <div class="contratos-grid" id="lista-cancelados"></div>
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display:none">
+            <div class="empty-icon">📋</div>
+            <p>Nenhum contrato encontrado ainda.</p>
+        </div>
+    </div>
+
+    <!-- Modal avaliação -->
+    <div class="modal-overlay" id="modal-avaliar" onclick="if(event.target===this)fecharModal('modal-avaliar')">
+        <div class="modal">
+            <div class="modal-title">Avaliar projeto</div>
+            <div class="modal-sub" id="avaliar-sub">Como foi sua experiência?</div>
+            <div class="estrelas" id="estrelas">
+                <span class="estrela" onclick="selecionarNota(1)">⭐</span>
+                <span class="estrela" onclick="selecionarNota(2)">⭐</span>
+                <span class="estrela" onclick="selecionarNota(3)">⭐</span>
+                <span class="estrela" onclick="selecionarNota(4)">⭐</span>
+                <span class="estrela" onclick="selecionarNota(5)">⭐</span>
+            </div>
+            <div class="form-group">
+                <label>Comentário (opcional)</label>
+                <textarea id="avaliar-comentario" rows="3" placeholder="Descreva sua experiência..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="fecharModal('modal-avaliar')">Cancelar</button>
+                <button class="btn-enviar" onclick="enviarAvaliacao()">Enviar avaliação</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/contratos.js"></script>
+</body>
+
+</html>

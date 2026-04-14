@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="WorkFinder — Perfil do freelancer: gerencie suas habilidades, experiências e portfólio." />
+  <meta name="description"
+    content="WorkFinder — Perfil do freelancer: gerencie suas habilidades, experiências e portfólio." />
   <title>Meu Perfil — WorkFinder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/perfil-freelancer.css" />
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -18,7 +23,9 @@
       WorkFinder
     </a>
     <div class="nav-actions">
-      <button class="btn-nav btn-nav-ghost" onclick="window.location.href='home.html'">← Explorar projetos</button>
+      <button class="btn-nav btn-nav-ghost" onclick="window.location.href='home.html'">← Projetos</button>
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='propostas.html'">Propostas</button>
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='contratos.html'">Contratos</button>
       <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
     </div>
   </nav>
@@ -39,7 +46,8 @@
         <div class="profile-actions">
           <button class="btn-share" title="Compartilhar perfil">
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 1 1 0-2.684m0 2.684 6.632 3.316m-6.632-6 6.632-3.316m0 0a3 3 0 1 0 5.367-2.684 3 3 0 0 0-5.367 2.684Zm0 9.316a3 3 0 1 0 5.368 2.684 3 3 0 0 0-5.368-2.684Z"/>
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 1 1 0-2.684m0 2.684 6.632 3.316m-6.632-6 6.632-3.316m0 0a3 3 0 1 0 5.367-2.684 3 3 0 0 0-5.367 2.684Zm0 9.316a3 3 0 1 0 5.368 2.684 3 3 0 0 0-5.368-2.684Z" />
             </svg>
           </button>
           <button class="btn-edit-profile" onclick="abrirModal('modal-bio')">
@@ -54,13 +62,15 @@
       <div class="profile-meta">
         <span class="profile-meta-item">
           <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/>
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
           </svg>
           São Paulo, SP
         </span>
         <span class="profile-meta-item">
           <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/>
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
           </svg>
           github.com/mvieira
         </span>
@@ -91,7 +101,9 @@
           <button class="btn-section-edit" onclick="abrirModal('modal-bio')">Editar</button>
         </div>
         <p class="bio-text" id="display-bio">
-          Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React. Apaixonado por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de e-commerce, SaaS, IoT e análise de dados. Gosto de código limpo, boa documentação e entrega dentro do prazo.
+          Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React. Apaixonado
+          por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de e-commerce, SaaS, IoT e
+          análise de dados. Gosto de código limpo, boa documentação e entrega dentro do prazo.
         </p>
       </div>
 
@@ -118,7 +130,8 @@
             <div class="exp-title">Desenvolvedor Full-Stack Freelancer</div>
             <div class="exp-company">Autônomo · Freelance</div>
             <div class="exp-period">Jan 2022 – Presente · 3 anos</div>
-            <div class="exp-desc">Desenvolvimento de aplicações web para clientes de diversos segmentos. Projetos com React, Python/Flask, MySQL e integrações com APIs de pagamento.</div>
+            <div class="exp-desc">Desenvolvimento de aplicações web para clientes de diversos segmentos. Projetos com
+              React, Python/Flask, MySQL e integrações com APIs de pagamento.</div>
           </div>
         </div>
         <div class="exp-item">
@@ -127,7 +140,8 @@
             <div class="exp-title">Desenvolvedor Junior</div>
             <div class="exp-company">TechKid Soluções · CLT</div>
             <div class="exp-period">Mar 2021 – Dez 2021 · 10 meses</div>
-            <div class="exp-desc">Manutenção e desenvolvimento de novas features em sistema ERP interno. Stack: PHP, Vue.js e PostgreSQL.</div>
+            <div class="exp-desc">Manutenção e desenvolvimento de novas features em sistema ERP interno. Stack: PHP,
+              Vue.js e PostgreSQL.</div>
           </div>
         </div>
       </div>
@@ -258,7 +272,8 @@
         </div>
         <div class="form-group">
           <label>Sobre você</label>
-          <textarea id="input-bio" rows="4">Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React. Apaixonado por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de e-commerce, SaaS, IoT e análise de dados. Gosto de código limpo, boa documentação e entrega dentro do prazo.</textarea>
+          <textarea id="input-bio"
+            rows="4">Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React. Apaixonado por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de e-commerce, SaaS, IoT e análise de dados. Gosto de código limpo, boa documentação e entrega dentro do prazo.</textarea>
         </div>
         <div class="form-group">
           <label>Pretensão (R$/hora)</label>
@@ -279,8 +294,10 @@
       <form onsubmit="salvarSkills(event)">
         <div class="form-group">
           <label>Habilidades (separadas por vírgula)</label>
-          <input type="text" id="input-skills" value="Python, Flask, React, Node.js, MySQL, Docker, Git, REST APIs, TypeScript, Linux" />
-          <small style="font-size:.78rem;color:#718096;margin-top:.25rem;display:block">Ex: Python, React, Figma, SQL</small>
+          <input type="text" id="input-skills"
+            value="Python, Flask, React, Node.js, MySQL, Docker, Git, REST APIs, TypeScript, Linux" />
+          <small style="font-size:.78rem;color:#718096;margin-top:.25rem;display:block">Ex: Python, React, Figma,
+            SQL</small>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-cancel" onclick="fecharModal('modal-skills')">Cancelar</button>
@@ -290,6 +307,8 @@
     </div>
   </div>
 
+  <script src="../assets/js/api.js"></script>
   <script src="../assets/js/perfil-freelancer.js"></script>
 </body>
+
 </html>

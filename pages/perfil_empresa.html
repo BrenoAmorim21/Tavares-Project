@@ -101,84 +101,22 @@
         </p>
       </div>
 
-      <!-- Projetos ativos -->
+      <!-- Projetos ativos (carregado via JS) -->
       <div class="section">
         <div class="section-header">
           <span class="section-title">Projetos publicados</span>
           <button class="btn-pub" style="padding:.35rem .85rem;font-size:.8rem"
             onclick="location.href='pub_vaga.html'">+ Novo</button>
         </div>
-
-        <div class="project-item">
-          <div class="proj-meta">
-            <span class="badge badge-aberta">Aberta</span>
-            <span class="badge badge-remoto">Remoto</span>
-            <span class="budget-inline">R$ 18.000 – R$ 25.000</span>
-          </div>
-          <div class="proj-title" onclick="abrirProjeto(1)">
-            Desenvolvimento de plataforma e-commerce em React + Node
-          </div>
-          <div class="proj-desc">Criação do zero de uma plataforma de e-commerce com catálogo, carrinho, checkout Stripe
-            e painel admin. 7 propostas recebidas.</div>
-        </div>
-
-        <div class="project-item">
-          <div class="proj-meta">
-            <span class="badge badge-aberta">Aberta</span>
-            <span class="badge badge-remoto">Remoto</span>
-            <span class="budget-inline">R$ 8.000 – R$ 14.000</span>
-          </div>
-          <div class="proj-title" onclick="abrirProjeto(2)">
-            API REST para integração IoT com painel de monitoramento
-          </div>
-          <div class="proj-desc">Backend em Flask para receber dados de sensores via MQTT, armazenar e exibir em
-            dashboard em tempo real. 2 propostas recebidas.</div>
-        </div>
-
-        <div class="project-item">
-          <div class="proj-meta">
-            <span class="badge" style="background:var(--surface);color:var(--ink-light)">Fechada</span>
-            <span class="badge badge-hibrido">Híbrido</span>
-            <span class="budget-inline">R$ 5.000 – R$ 8.000</span>
-          </div>
-          <div class="proj-title">Design e prototipagem do app mobile de delivery</div>
-          <div class="proj-desc">Redesign completo do fluxo de pedido, cardápio e rastreamento em Figma. Projeto
-            concluído com sucesso.</div>
-        </div>
+        <p style="color:var(--ink-light);font-size:.875rem">Carregando projetos...</p>
       </div>
 
-      <!-- Avaliações -->
+      <!-- Avaliações (carregado via JS) -->
       <div class="section">
         <div class="section-header">
           <span class="section-title">Avaliações de freelancers</span>
         </div>
-
-        <div class="review-item">
-          <div class="review-header">
-            <div class="review-avatar" style="background:#EBF2FF;color:#1A56DB">MV</div>
-            <div>
-              <div class="review-name">Mateus Vieira</div>
-              <div class="review-date">há 3 semanas · Projeto: Design mobile</div>
-            </div>
-            <div class="review-stars" style="margin-left:auto">⭐⭐⭐⭐⭐</div>
-          </div>
-          <p class="review-text">Empresa excelente para trabalhar! Comunicação clara, pagamento em dia e feedbacks
-            construtivos. Recomendo fortemente para outros freelancers.</p>
-        </div>
-
-        <div class="review-item">
-          <div class="review-header">
-            <div class="review-avatar" style="background:#D1FAE5;color:#059669">AC</div>
-            <div>
-              <div class="review-name">Ana Costa</div>
-              <div class="review-date">há 2 meses · Projeto: IoT API</div>
-            </div>
-            <div class="review-stars" style="margin-left:auto">⭐⭐⭐⭐⭐</div>
-          </div>
-          <p class="review-text">Briefing muito bem definido desde o início, o que facilitou muito o desenvolvimento.
-            Equipe receptiva às sugestões técnicas. Ótima experiência!</p>
-        </div>
-
+        <p style="color:var(--ink-light);font-size:.875rem">Carregando avaliações...</p>
       </div>
     </div>
 
@@ -188,9 +126,9 @@
       <!-- Rating -->
       <div class="section">
         <div class="rating-big">
-          <div class="rating-num">4.8</div>
-          <div class="rating-stars">⭐⭐⭐⭐⭐</div>
-          <div class="rating-sub">Baseado em 4 avaliações</div>
+          <div class="rating-num">–</div>
+          <div class="rating-stars"></div>
+          <div class="rating-sub">Carregando...</div>
         </div>
         <button class="btn-contact" onclick="alert('Mensagem enviada!\n(Chat será implementado com o backend)')">
           ✉ Enviar mensagem

@@ -31,6 +31,7 @@ function salvarSessao(dados) {
   localStorage.setItem('wf_tipo',  dados.tipo);
   localStorage.setItem('wf_nome',  dados.nome);
   localStorage.setItem('wf_id',    dados.id);
+  if (dados.perfil_id) localStorage.setItem('wf_perfil_id', String(dados.perfil_id));
 }
 
 function redirecionarDashboard(tipo) {

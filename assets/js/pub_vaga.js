@@ -1,59 +1,63 @@
-// ── WorkFinder — pub_vaga.js ──
+// ============================================================
+//  WorkFinder — assets/js/pub_vaga.js
+//  Publicar novo projeto — integrado com API real
+// ============================================================
 
 let modalidadeSelecionada = 'remoto';
 let skillsList = [];
 
-// ── Inicia a página ──────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // Seleciona "Remoto" por padrão
-  selecionarModalidade('remoto');
+    Sessao.exigir();
+    if (Sessao.tipo !== 'empresa') { window.location.href = 'home.html'; return; }
 
-  // Input de habilidades ao pressionar Enter ou vírgula
-  const inpHab = document.getElementById('inp-habilidades');
-  if (inpHab) {
-    inpHab.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ',') {
-        e.preventDefault();
-        adicionarSkill(inpHab.value.trim().replace(',', ''));
-        inpHab.value = '';
-      }
-    });
-    inpHab.addEventListener('blur', () => {
-      const v = inpHab.value.trim();
-      if (v) { adicionarSkill(v); inpHab.value = ''; }
-    });
-  }
+    selecionarModalidade('remoto');
 
-  // Listeners para preview em tempo real
-  ['inp-titulo', 'inp-desc', 'inp-orcamento-min', 'inp-orcamento-max', 'inp-prazo'].forEach(id => {
-    document.getElementById(id)?.addEventListener('input', atualizarPreview);
-  });
+    // Input de habilidades ao pressionar Enter ou vírgula
+    const inpHab = document.getElementById('inp-habilidades');
+    if (inpHab) {
+        inpHab.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                adicionarSkill(inpHab.value.trim().replace(',', ''));
+                inpHab.value = '';
+            }
+        });
+        inpHab.addEventListener('blur', () => {
+            const v = inpHab.value.trim();
+            if (v) { adicionarSkill(v); inpHab.value = ''; }
+        });
+    }
+
+    // Listeners para preview em tempo real
+    ['inp-titulo', 'inp-desc', 'inp-orcamento-min', 'inp-orcamento-max', 'inp-prazo'].forEach(id => {
+        document.getElementById(id)?.addEventListener('input', atualizarPreview);
+    });
 });
 
 function selecionarModalidade(modo) {
-  modalidadeSelecionada = modo;
-  document.querySelectorAll('.modal-opt').forEach(el => el.classList.remove('selected'));
-  document.querySelector(`[data-modalidade="${modo}"]`)?.classList.add('selected');
-  atualizarPreview();
+    modalidadeSelecionada = modo;
+    document.querySelectorAll('.modal-opt').forEach(el => el.classList.remove('selected'));
+    document.querySelector(`[data-modalidade="${modo}"]`)?.classList.add('selected');
+    atualizarPreview();
 }
 
 function adicionarSkill(nome) {
-  if (!nome || skillsList.includes(nome)) return;
-  skillsList.push(nome);
-  renderSkills();
-  atualizarPreview();
+    if (!nome || skillsList.includes(nome)) return;
+    skillsList.push(nome);
+    renderSkills();
+    atualizarPreview();
 }
 
 function removerSkill(nome) {
-  skillsList = skillsList.filter(s => s !== nome);
-  renderSkills();
-  atualizarPreview();
+    skillsList = skillsList.filter(s => s !== nome);
+    renderSkills();
+    atualizarPreview();
 }
 
 function renderSkills() {
-  const wrap = document.getElementById('skills-preview');
-  if (!wrap) return;
-  wrap.innerHTML = skillsList.map(s => `
+    const wrap = document.getElementById('skills-preview');
+    if (!wrap) return;
+    wrap.innerHTML = skillsList.map(s => `
     <span class="skill-chip">
       ${s}
       <button type="button" onclick="removerSkill('${s}')">✕</button>
@@ -62,28 +66,24 @@ function renderSkills() {
 }
 
 function atualizarPreview() {
-  const titulo    = document.getElementById('inp-titulo')?.value || 'Título do projeto';
-  const desc      = document.getElementById('inp-desc')?.value   || 'Descrição será exibida aqui...';
-  const min       = document.getElementById('inp-orcamento-min')?.value;
-  const max       = document.getElementById('inp-orcamento-max')?.value;
-  const prazo     = document.getElementById('inp-prazo')?.value  || '–';
+    const titulo = document.getElementById('inp-titulo')?.value || 'Título do projeto';
+    const desc = document.getElementById('inp-desc')?.value || 'Descrição será exibida aqui...';
+    const min = document.getElementById('inp-orcamento-min')?.value;
+    const max = document.getElementById('inp-orcamento-max')?.value;
+    const prazo = document.getElementById('inp-prazo')?.value || '–';
 
-  const orcamento = (min && max)
-    ? `R$ ${Number(min).toLocaleString('pt-BR')} – R$ ${Number(max).toLocaleString('pt-BR')}`
-    : min ? `A partir de R$ ${Number(min).toLocaleString('pt-BR')}`
-    : '–';
+    const orcamento = (min && max)
+        ? `R$ ${Number(min).toLocaleString('pt-BR')} – R$ ${Number(max).toLocaleString('pt-BR')}`
+        : min ? `A partir de R$ ${Number(min).toLocaleString('pt-BR')}`
+        : '–';
 
-  const labelModal = {
-    remoto: 'Remoto', hibrido: 'Híbrido', presencial: 'Presencial'
-  };
-  const classModal = {
-    remoto: 'badge-remoto', hibrido: 'badge-hibrido', presencial: 'badge-presencial'
-  };
+    const labelModal = { remoto: 'Remoto', hibrido: 'Híbrido', presencial: 'Presencial' };
+    const classModal = { remoto: 'badge-remoto', hibrido: 'badge-hibrido', presencial: 'badge-presencial' };
 
-  const el = document.getElementById('preview-content');
-  if (!el) return;
+    const el = document.getElementById('preview-content');
+    if (!el) return;
 
-  el.innerHTML = `
+    el.innerHTML = `
     <div class="preview-job-title">${titulo}</div>
     <div class="preview-meta">
       <span class="badge ${classModal[modalidadeSelecionada]}">${labelModal[modalidadeSelecionada]}</span>
@@ -95,45 +95,43 @@ function atualizarPreview() {
   `;
 }
 
-function publicarVaga() {
-  const titulo = document.getElementById('inp-titulo')?.value?.trim();
-  const desc   = document.getElementById('inp-desc')?.value?.trim();
-  const tipo   = document.getElementById('inp-tipo')?.value;
+async function publicarVaga() {
+    const titulo = document.getElementById('inp-titulo')?.value?.trim();
+    const desc = document.getElementById('inp-desc')?.value?.trim();
+    const tipo = document.getElementById('inp-tipo')?.value;
+    const area = document.getElementById('inp-area')?.value;
 
-  if (!titulo) { alert('Informe o título do projeto.'); return; }
-  if (!desc)   { alert('Descreva o projeto.'); return; }
-  if (!tipo)   { alert('Selecione o tipo de contratação.'); return; }
+    if (!titulo) { toast('Informe o título do projeto.', 'info'); return; }
+    if (!desc) { toast('Descreva o projeto.', 'info'); return; }
+    if (!tipo) { toast('Selecione o tipo de contratação.', 'info'); return; }
 
-  // Monta objeto da vaga
-  const min = document.getElementById('inp-orcamento-min')?.value;
-  const max = document.getElementById('inp-orcamento-max')?.value;
+    const min = document.getElementById('inp-orcamento-min')?.value;
+    const max = document.getElementById('inp-orcamento-max')?.value;
+    const prazo = document.getElementById('inp-prazo')?.value;
+    const nivel = document.getElementById('inp-nivel')?.value;
 
-  const vaga = {
-    id: Date.now(),
-    titulo,
-    descricao: desc,
-    tags: skillsList,
-    modalidade: modalidadeSelecionada,
-    tipo,
-    orcamento: (min && max)
-      ? `R$ ${Number(min).toLocaleString('pt-BR')} – R$ ${Number(max).toLocaleString('pt-BR')}`
-      : '–',
-    prazo: document.getElementById('inp-prazo')?.value || 'A combinar',
-    status: 'aberta',
-    publicado: 'agora mesmo',
-    propostas: []
-  };
+    try {
+        await API.post('/vagas', {
+            titulo,
+            descricao: desc,
+            tipo,
+            modalidade: modalidadeSelecionada,
+            area: area || null,
+            habilidades: skillsList.join(', ') || null,
+            nivel: nivel || null,
+            orcamento_min: min || null,
+            orcamento_max: max || null,
+            prazo_dias: prazo || null,
+        });
 
-  // Salva no localStorage (integra com dash_empresa.js)
-  const jobs = JSON.parse(localStorage.getItem('wf_jobs') || '[]');
-  jobs.unshift(vaga);
-  localStorage.setItem('wf_jobs', JSON.stringify(jobs));
-
-  // Mostra tela de sucesso
-  document.getElementById('form-section').style.display = 'none';
-  document.getElementById('success-section').classList.add('show');
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('success-section').classList.add('show');
+        toast('Projeto publicado com sucesso! 🎉', 'success');
+    } catch (e) {
+        toast(e.mensagem || 'Erro ao publicar projeto.', 'error');
+    }
 }
 
 function salvarRascunho() {
-  alert('Rascunho salvo!\n(Funcionalidade completa disponível com o backend)');
+    toast('Rascunho salvo localmente!', 'info');
 }

@@ -12,7 +12,7 @@ const Sessao = {
     get nome() { return localStorage.getItem('wf_nome'); },
     get id() { return localStorage.getItem('wf_id'); },
     get perfil_id() { return localStorage.getItem('wf_perfil_id'); },
-    get logado() { return !!this.token && this.token !== 'demo-token'; },
+    get logado() { return !!this.token && !!this.tipo; },
 
     salvar(d) {
         localStorage.setItem('wf_token', d.token);
@@ -86,7 +86,7 @@ function fmtRelativo(s) {
     if (h < 24) return `há ${h}h`;
     const d = Math.floor(h / 24);
     if (d < 7) return `há ${d} dia${d > 1 ? 's' : ''}`;
-    if (d < 30) return `há ${Math.floor(d/7)} semana${Math.floor(d/7) > 1 ? 's' : ''}`;
+    if (d < 30) return `há ${Math.floor(d / 7)} semana${Math.floor(d / 7) > 1 ? 's' : ''}`;
     return fmtData(s);
 }
 
@@ -100,7 +100,7 @@ function starsHTML(nota, animated = false) {
     let html = '';
     for (let i = 1; i <= 5; i++) {
         const cls = i <= nota ? 'star-filled' : 'star-empty';
-        const delay = animated ? `style="animation-delay:${(i-1)*0.08}s"` : '';
+        const delay = animated ? `style="animation-delay:${(i - 1) * 0.08}s"` : '';
         html += `<span class="star ${cls}" ${delay}>★</span>`;
     }
     return html;
@@ -162,7 +162,7 @@ const Notif = {
                 badge.textContent = count > 9 ? '9+' : count || '';
                 badge.style.display = count > 0 ? 'flex' : 'none';
             }
-        } catch {}
+        } catch { }
     },
 
     async abrirPainel() {
@@ -236,14 +236,14 @@ const Notif = {
     },
 
     async clicar(id, link) {
-        try { await API.patch(`/notificacoes/${id}/lida`, {}); } catch {}
+        try { await API.patch(`/notificacoes/${id}/lida`, {}); } catch { }
         document.getElementById('notif-painel')?.remove();
         await Notif.carregarBadge();
         if (link) window.location.href = link;
     },
 
     async marcarTodas() {
-        try { await API.patch('/notificacoes/marcar-todas', {}); } catch {}
+        try { await API.patch('/notificacoes/marcar-todas', {}); } catch { }
         document.getElementById('notif-painel')?.remove();
         await Notif.carregarBadge();
     },

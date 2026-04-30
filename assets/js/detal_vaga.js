@@ -127,18 +127,37 @@ function renderVaga() {
 
 async function enviarProposta() {
     if (!vagaAtual) return;
-    const valor = document.getElementById('inp-valor')?.value;
-    const prazo = document.getElementById('inp-prazo-prop')?.value;
+
+    const valorRaw = document.getElementById('inp-valor')?.value || '';
+    const prazoRaw = document.getElementById('inp-prazo-prop')?.value || '';
     const msg = document.getElementById('inp-msg')?.value?.trim();
 
-    if (!msg) { toast('Escreva uma mensagem para a empresa.', 'info'); return; }
+    const valorLimpo = valorRaw
+        .replace(/[^\d,.-]/g, '')
+        .replace('.', '')
+        .replace(',', '.');
+
+    const prazoLimpo = prazoRaw.replace(/\D/g, '');
+
+    const valorProposto = valorLimpo ? Number(valorLimpo) : null;
+    const prazoProposto = prazoLimpo ? Number(prazoLimpo) : null;
+
+    if (!msg) {
+        toast('Escreva uma mensagem para a empresa.', 'info');
+        return;
+    }
+
+    if (!prazoProposto || prazoProposto <= 0) {
+        toast('Informe o prazo apenas em dias. Exemplo: 45', 'info');
+        return;
+    }
 
     try {
         await API.post('/propostas', {
             job_id: vagaAtual.id,
             mensagem: msg,
-            valor_proposto: valor || null,
-            prazo_proposto: prazo || null
+            valor_proposto: valorProposto,
+            prazo_proposto: prazoProposto
         });
 
         document.getElementById('form-proposta').style.display = 'none';

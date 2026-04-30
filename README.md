@@ -277,7 +277,7 @@ python-dotenv==1.0.1
 | Nome | GitHub |
 |------|--------|
 | **Breno Amorim Candido** | [@BrenoAmorim21](https://github.com/BrenoAmorim21) |
-| **Bruno Augusto dos Santos Pereira** | — |
+| **Bruno Augusto dos Santos Pereira** | [userbrun1n](https://github.com/userbrun1n) |
 | **Fernando Ferreira Mendes** | — |
 
 </div>

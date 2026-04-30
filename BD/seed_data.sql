@@ -894,3 +894,25 @@ VALUES (
         'Otima experiencia! Equipe muito profissional e organizada. O briefing inicial foi bem detalhado. Unico ponto seria mais agilidade nas aprovacoes, mas no geral foi excelente.',
         DATE_SUB(NOW(), INTERVAL 18 DAY)
     );
+
+-- ─── NOTIFICAÇÕES DEMO ──────────────────────────────────────
+DELETE FROM notifications;
+
+INSERT INTO notifications (user_id, tipo, titulo, mensagem, lida, link, criado_em) VALUES
+-- Mateus Vieira (user_id=10, freelancer)
+(10, 'proposta_aceita',   'Sua proposta foi aceita! 🎉', 'A VTEX aceitou sua proposta para "App VTEX IO para checkout customizado". Contrato criado.', 0, 'contratos.html', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(10, 'nova_avaliacao',    'Você recebeu uma avaliação ⭐', 'O iFood avaliou seu trabalho no projeto de automação de relatórios com nota 5.', 1, 'perfil-freelancer.html', DATE_SUB(NOW(), INTERVAL 9 DAY)),
+(10, 'proposta_recusada', 'Proposta não selecionada', 'Sua proposta para "Landing page Nubank Ultravioleta" não foi selecionada desta vez.', 1, 'propostas.html', DATE_SUB(NOW(), INTERVAL 20 DAY)),
+
+-- empresa TOTVS (user_id=1)
+(1, 'nova_proposta', 'Nova proposta recebida 👥', 'Rafael Souza enviou uma proposta para "Módulo de relatórios TOTVS Protheus". Confira!', 0, 'dash_empresa.html', DATE_SUB(NOW(), INTERVAL 12 HOUR)),
+(1, 'nova_proposta', 'Nova proposta recebida 👥', 'Ana Costa enviou uma proposta para "Módulo de relatórios TOTVS Protheus". Confira!', 0, 'dash_empresa.html', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+(1, 'nova_proposta', 'Nova proposta recebida 👥', 'Mateus Vieira enviou uma proposta para "App mobile força de vendas". Confira!', 1, 'dash_empresa.html', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+
+-- empresa iFood (user_id=4)
+(4, 'contrato_concluido', 'Contrato concluído ✅', 'O projeto "Automação de relatórios de marketing" foi marcado como concluído por Lucas Ferreira.', 1, 'contratos.html', DATE_SUB(NOW(), INTERVAL 10 DAY)),
+(4, 'nova_proposta',      'Nova proposta recebida 👥', 'Carolina Mendes enviou uma proposta para "Redesign fluxo de pedidos iFood".', 0, 'dash_empresa.html', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+
+-- Lucas Ferreira (user_id=14, freelancer)
+(14, 'proposta_aceita', 'Proposta aceita! 🎉', 'O iFood aceitou sua proposta para "Automação de relatórios de marketing iFood". Bom trabalho!', 1, 'contratos.html', DATE_SUB(NOW(), INTERVAL 55 DAY)),
+(14, 'nova_avaliacao',  'Você recebeu uma avaliação ⭐', 'O iFood avaliou seu trabalho com nota 5. Parabéns pela entrega excelente!', 1, 'perfil-freelancer.html', DATE_SUB(NOW(), INTERVAL 9 DAY));

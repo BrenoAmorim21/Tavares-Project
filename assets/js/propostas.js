@@ -146,6 +146,7 @@ function fecharModal(id) { document.getElementById(id)?.classList.remove('open')
 document.addEventListener('DOMContentLoaded', () => {
     Sessao.exigir();
     if (Sessao.tipo !== 'freelancer') { alert('Esta página é para freelancers.'); history.back(); return; }
+    Notif.injetar('.nav-actions');
     carregarPropostas();
     setInterval(carregarPropostas, 30000);
 });

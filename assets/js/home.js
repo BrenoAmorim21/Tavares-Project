@@ -3,17 +3,27 @@
 //  Feed de vagas reais via API com filtros funcionais
 // ============================================================
 
-let vagasCache = [];
-let filtroArea = 'todos';
-let termoBusca = '';
+let vagasCache   = [];
+let filtroArea   = 'todos';   // chips de área (server-side)
+let termoBusca   = '';
+let filtroOrdem  = 'recentes';
+let budgetMin    = 0;
+let budgetMax    = 999999;
 
+// Sets para checkboxes — iniciam com tudo marcado
+let filtroModalidades = new Set(['remoto', 'presencial', 'hibrido']);
+let filtroTipos       = new Set(['projeto', 'freelance', 'part-time']);
+let filtroAreas       = new Set(['Desenvolvimento Web', 'Design Grafico / UI/UX', 'Desenvolvimento Mobile', 'Dados / BI', 'Marketing']);
+
+// ── Carrega vagas do servidor ─────────────────────────────
 async function carregarVagas() {
     const grid = document.getElementById('project-grid');
     grid.innerHTML = '<p style="text-align:center;color:#718096;padding:2rem">Carregando projetos...</p>';
     try {
         const p = new URLSearchParams();
-        if (filtroArea !== 'todos') p.set('area', filtroArea);
         if (termoBusca) p.set('busca', termoBusca);
+        // Área via chip usa filtro único; sidebar usa client-side
+        if (filtroArea !== 'todos') p.set('area', filtroArea);
         vagasCache = await API.get('/vagas?' + p.toString());
         renderFeed();
     } catch (e) {
@@ -21,14 +31,80 @@ async function carregarVagas() {
     }
 }
 
+// ── Filtragem client-side (modalidade, tipo, área sidebar, budget) ──
+function filtrarLocal(vagas) {
+    return vagas.filter(v => {
+        if (!filtroModalidades.has(v.modalidade)) return false;
+        if (!filtroTipos.has(v.tipo)) return false;
+        if (filtroArea === 'todos' && filtroAreas.size < 5 && v.area && !filtroAreas.has(v.area)) return false;
+        const orc = v.orcamento_min || 0;
+        if (orc > 0 && (orc < budgetMin || orc > budgetMax)) return false;
+        return true;
+    });
+}
+
+// ── Ordenação ─────────────────────────────────────────────
+function ordenar(vagas) {
+    return [...vagas].sort((a, b) => {
+        if (filtroOrdem === 'orcamento')  return (b.orcamento_max || 0) - (a.orcamento_max || 0);
+        if (filtroOrdem === 'propostas')  return (a.total_propostas || 0) - (b.total_propostas || 0);
+        return new Date(b.criado_em) - new Date(a.criado_em);
+    });
+}
+
+// ── Atualiza contadores reais na sidebar ──────────────────
+function atualizarContadores(vagas) {
+    const cModal = {}, cTipo = {}, cArea = {};
+    vagas.forEach(v => {
+        cModal[v.modalidade] = (cModal[v.modalidade] || 0) + 1;
+        cTipo[v.tipo]        = (cTipo[v.tipo]        || 0) + 1;
+        if (v.area) cArea[v.area] = (cArea[v.area] || 0) + 1;
+    });
+    Object.entries(cModal).forEach(([k, n]) => {
+        const el = document.querySelector(`[data-count-modal="${k}"]`);
+        if (el) el.textContent = n;
+    });
+    Object.entries(cTipo).forEach(([k, n]) => {
+        const el = document.querySelector(`[data-count-tipo="${k}"]`);
+        if (el) el.textContent = n;
+    });
+    Object.entries(cArea).forEach(([k, n]) => {
+        const el = document.querySelector(`[data-count-area="${k}"]`);
+        if (el) el.textContent = n;
+    });
+}
+
+// ── Render principal ──────────────────────────────────────
+function renderFeed() {
+    const grid   = document.getElementById('project-grid');
+    const countEl = document.getElementById('feed-count');
+
+    atualizarContadores(vagasCache);
+
+    const filtradas = filtrarLocal(vagasCache);
+    const ordenadas = ordenar(filtradas);
+
+    if (countEl) {
+        const n = ordenadas.length;
+        countEl.textContent = `${n} projeto${n !== 1 ? 's' : ''} encontrado${n !== 1 ? 's' : ''}`;
+    }
+
+    grid.innerHTML = ordenadas.length === 0
+        ? '<div class="empty-state"><div style="font-size:2.5rem">🔍</div><p>Nenhum projeto encontrado com estes filtros.</p></div>'
+        : ordenadas.map(renderCard).join('');
+}
+
+// ── Card de vaga ──────────────────────────────────────────
 function badgeModal(m) {
-    const map = { remoto: 'badge-remoto', presencial: 'badge-presencial', hibrido: 'badge-hibrido' };
+    const map   = { remoto: 'badge-remoto', presencial: 'badge-presencial', hibrido: 'badge-hibrido' };
     const label = { remoto: 'Remoto', presencial: 'Presencial', hibrido: 'Híbrido' };
     return `<span class="badge ${map[m] || ''}">${label[m] || m}</span>`;
 }
 
 function renderCard(v) {
-    const tags = v.habilidades ? v.habilidades.split(',').map((t, i) => `<span class="tag ${i === 0 ? 'highlight' : ''}">${t.trim()}</span>`).join('') : '';
+    const tags = v.habilidades
+        ? v.habilidades.split(',').map((t, i) => `<span class="tag ${i === 0 ? 'highlight' : ''}">${t.trim()}</span>`).join('')
+        : '';
     const orc = v.orcamento_min && v.orcamento_max
         ? `${fmtMoeda(v.orcamento_min)} – ${fmtMoeda(v.orcamento_max)}`
         : v.orcamento_min ? `A partir de ${fmtMoeda(v.orcamento_min)}` : 'A combinar';
@@ -65,15 +141,7 @@ function renderCard(v) {
     </div>`;
 }
 
-function renderFeed() {
-    const grid = document.getElementById('project-grid');
-    const el = document.getElementById('feed-count');
-    if (el) el.textContent = `${vagasCache.length} projeto${vagasCache.length !== 1 ? 's' : ''} encontrado${vagasCache.length !== 1 ? 's' : ''}`;
-    grid.innerHTML = vagasCache.length === 0
-        ? '<div class="empty-state"><div style="font-size:2.5rem">🔍</div><p>Nenhum projeto encontrado.</p></div>'
-        : vagasCache.map(renderCard).join('');
-}
-
+// ── Helpers ───────────────────────────────────────────────
 function filterChip(el, area) {
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
@@ -81,17 +149,45 @@ function filterChip(el, area) {
     carregarVagas();
 }
 
+function aplicarBudget(radio) {
+    const [min, max] = radio.value.split(',').map(Number);
+    budgetMin = min;
+    budgetMax = max;
+    renderFeed();
+}
+
 function abrirVaga(id) { window.location.href = `detal_vaga.html?id=${id}`; }
 
+// ── Init ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     Sessao.exigir();
+
     const nome = Sessao.nome || 'Usuário';
-    const av = document.querySelector('.avatar');
+    const av = document.getElementById('avatar-home');
     if (av) av.textContent = iniciais(nome);
-    carregarVagas();
+
+    // Injeta sino de notificações
+    Notif.injetar('#nav-actions-home');
+
+    // Checkboxes de modalidade, tipo e área
+    document.querySelectorAll('[data-filter]').forEach(cb => {
+        cb.addEventListener('change', () => {
+            const tipo = cb.dataset.filter;
+            const val  = cb.value;
+            const set  = tipo === 'modalidade' ? filtroModalidades
+                       : tipo === 'tipo'        ? filtroTipos
+                       :                          filtroAreas;
+            cb.checked ? set.add(val) : set.delete(val);
+            renderFeed();
+        });
+    });
+
+    // Busca com debounce
     document.getElementById('search-input')?.addEventListener('input', e => {
         termoBusca = e.target.value;
-        clearTimeout(window._t);
-        window._t = setTimeout(carregarVagas, 400);
+        clearTimeout(window._searchT);
+        window._searchT = setTimeout(carregarVagas, 400);
     });
+
+    carregarVagas();
 });

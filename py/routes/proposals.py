@@ -10,7 +10,7 @@
 from flask import Blueprint, request, jsonify, g
 import datetime
 from decorators import login_required
-from db import get_conn, query_one, query_all
+from db import get_conn, query_one, query_all, criar_notificacao
 
 proposals_bp = Blueprint('proposals', __name__)
 
@@ -74,7 +74,25 @@ def enviar():
               d.get('valor_proposto') or None,
               d.get('prazo_proposto') or None))
         conn.commit()
-        return jsonify({'mensagem': 'Proposta enviada!', 'id': cur.lastrowid}), 201
+        prop_id = cur.lastrowid
+
+        # Notifica a empresa sobre nova proposta
+        info = query_one('''
+            SELECT j.titulo, c.user_id AS empresa_uid, f.nome AS freelancer_nome
+            FROM jobs j
+            JOIN companies c ON c.id = j.company_id
+            JOIN freelancers f ON f.id = %s
+            WHERE j.id = %s
+        ''', (freelancer_id, job_id))
+        if info:
+            criar_notificacao(
+                info['empresa_uid'], 'nova_proposta',
+                'Nova proposta recebida 👥',
+                f'{info["freelancer_nome"]} enviou uma proposta para "{info["titulo"]}".',
+                'dash_empresa.html'
+            )
+
+        return jsonify({'mensagem': 'Proposta enviada!', 'id': prop_id}), 201
     except Exception as e:
         conn.rollback()
         print(f'[ERRO enviar proposta] {e}')
@@ -192,6 +210,26 @@ def responder(prop_id):
             ''', (agora, prop['job_id'], prop_id))
 
         conn.commit()
+
+        # Notifica o freelancer sobre a resposta
+        free_user = query_one('SELECT user_id FROM freelancers WHERE id=%s', (prop['freelancer_id'],))
+        vaga_info = query_one('SELECT titulo FROM jobs WHERE id=%s', (prop['job_id'],))
+        if free_user and vaga_info:
+            if novo_status == 'aceita':
+                criar_notificacao(
+                    free_user['user_id'], 'proposta_aceita',
+                    'Sua proposta foi aceita! 🎉',
+                    f'Parabéns! Sua proposta para "{vaga_info["titulo"]}" foi aceita. Contrato criado.',
+                    'contratos.html'
+                )
+            else:
+                criar_notificacao(
+                    free_user['user_id'], 'proposta_recusada',
+                    'Proposta não selecionada',
+                    f'Sua proposta para "{vaga_info["titulo"]}" não foi selecionada desta vez.',
+                    'propostas.html'
+                )
+
         msg = 'Proposta aceita! Contrato criado.' if novo_status == 'aceita' else 'Proposta recusada.'
         return jsonify({'mensagem': msg}), 200
 

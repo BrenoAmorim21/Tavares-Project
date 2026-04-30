@@ -26,7 +26,7 @@ const Sessao = {
     },
 
     exigir() {
-        if (!this.token) {
+        if (!this.logado) {
             const em = window.location.pathname.includes('/pages/');
             window.location.href = em ? '../index.html' : 'index.html';
         }

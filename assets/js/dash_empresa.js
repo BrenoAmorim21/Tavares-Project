@@ -124,15 +124,18 @@ async function abrirCandidatos(jobId) {
             lista.innerHTML = '<p style="color:var(--ink-light);font-size:.875rem">Nenhuma proposta recebida ainda.</p>';
         } else {
             lista.innerHTML = propostas.map(p => {
-                const mediaStars = p.media_nota ? starsHTML(Math.round(p.media_nota)) : '<span style="color:#718096;font-size:.8rem">Sem avaliações</span>';
+                const mediaStars = p.media_nota > 0
+                    ? starsHTML(Math.round(p.media_nota)) + ` <span style="font-size:.75rem;color:#4A5568">${parseFloat(p.media_nota).toFixed(1)}</span>`
+                    : '<span style="color:#718096;font-size:.8rem">Sem avaliações</span>';
                 return `
                 <div class="candidato-card">
-                    <div class="cand-avatar">${iniciais(p.freelancer_nome)}</div>
+                    <div class="cand-avatar" style="cursor:pointer" onclick="location.href='perfil_publico.html?id=${p.freelancer_id}'" title="Ver perfil">${iniciais(p.freelancer_nome)}</div>
                     <div class="cand-info">
-                        <div class="cand-name">${p.freelancer_nome}</div>
+                        <div class="cand-name" style="cursor:pointer" onclick="location.href='perfil_publico.html?id=${p.freelancer_id}'">${p.freelancer_nome} <span style="font-size:.75rem;color:#1A56DB">→ ver perfil</span></div>
                         <div class="cand-area">${p.area || '–'} · ${p.experiencia || '–'}</div>
-                        <div class="cand-valor">Proposta: ${fmtMoeda(p.valor_proposto)}</div>
-                        <div style="margin-top:.3rem">${mediaStars}</div>
+                        <div class="cand-valor">💬 ${p.mensagem ? p.mensagem.substring(0, 80) + (p.mensagem.length > 80 ? '…' : '') : '–'}</div>
+                        <div class="cand-valor" style="margin-top:.2rem">Proposta: <strong>${fmtMoeda(p.valor_proposto)}</strong> · ${p.prazo_proposto ? fmtData(p.prazo_proposto) : 'A combinar'}</div>
+                        <div style="margin-top:.3rem;display:flex;align-items:center;gap:.3rem">${mediaStars}</div>
                     </div>
                     <div class="cand-actions">
                         ${p.status === 'pendente' ? `
@@ -182,12 +185,62 @@ function setTab(el, filtro) {
 function fecharModal(id) { document.getElementById(id).classList.remove('open'); }
 function fecharModalFora(e) { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('open'); }
 
+async function carregarStats() {
+    try {
+        const s = await API.get('/stats/empresa');
+        const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        set('stat-total',       s.total_projetos    || 0);
+        set('stat-abertos',     s.projetos_abertos  || 0);
+        set('stat-propostas',   s.total_propostas   || 0);
+        set('stat-contratados', s.total_contratos   || 0);
+
+        // Avaliação média na navbar do gráfico
+        const notaEl = document.getElementById('dash-media-nota');
+        if (notaEl && s.media_nota > 0) {
+            notaEl.innerHTML = `${starsHTML(Math.round(s.media_nota))} <span style="color:#0E1726">${s.media_nota}</span> <span style="color:#718096;font-weight:400">(${s.total_avaliacoes} avaliações)</span>`;
+        }
+
+        // Gráfico de barras CSS
+        renderGrafico(s.grafico_propostas || []);
+    } catch (e) {
+        // Fallback silencioso — atualizarStats() já calcula localmente a partir dos jobs
+    }
+}
+
+function renderGrafico(dados) {
+    const el = document.getElementById('chart-propostas');
+    if (!el) return;
+    if (!dados.length) {
+        el.innerHTML = '<p style="color:#718096;font-size:.875rem;text-align:center;padding:.5rem">Nenhum projeto publicado ainda.</p>';
+        return;
+    }
+    const max = Math.max(...dados.map(d => d.valor), 1);
+    el.innerHTML = dados.map(d => {
+        const pct = Math.round((d.valor / max) * 100);
+        const cor = pct > 66 ? '#1A56DB' : pct > 33 ? '#6D28D9' : '#059669';
+        return `
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div style="width:160px;font-size:.78rem;color:#4A5568;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0" title="${d.label}">${d.label}</div>
+          <div style="flex:1;background:#F7F9FC;border-radius:6px;height:22px;overflow:hidden">
+            <div style="width:${pct}%;height:100%;background:${cor};border-radius:6px;
+                        transition:width .8s cubic-bezier(.4,0,.2,1);
+                        display:flex;align-items:center;justify-content:flex-end;padding-right:6px">
+              ${d.valor > 0 ? `<span style="font-size:.7rem;font-weight:700;color:#fff">${d.valor}</span>` : ''}
+            </div>
+          </div>
+          <div style="width:28px;text-align:right;font-size:.8rem;font-weight:600;color:#4A5568">${d.valor}</div>
+        </div>`;
+    }).join('');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     Sessao.exigir();
     if (Sessao.tipo !== 'empresa') { window.location.href = 'home.html'; return; }
     const elNome = document.getElementById('nome-empresa');
     if (elNome) elNome.textContent = Sessao.nome || 'Empresa';
-    const av = document.querySelector('.avatar');
-    if (av) av.textContent = iniciais(Sessao.nome);
+    const av = document.getElementById('avatar-empresa');
+    if (av) { av.textContent = iniciais(Sessao.nome); av.title = Sessao.nome || ''; }
+    Notif.injetar('#nav-actions-dash');
+    carregarStats();
     carregarJobs();
 });

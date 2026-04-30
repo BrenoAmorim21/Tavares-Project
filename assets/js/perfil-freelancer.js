@@ -10,8 +10,23 @@ async function carregarPerfil() {
     try {
         dadosPerfil = await API.get('/usuarios/perfil');
         renderPerfil();
-        await carregarAvaliacoes();
+        await Promise.all([carregarAvaliacoes(), carregarStatsReais()]);
     } catch (e) { toast('Erro ao carregar perfil.', 'error'); }
+}
+
+async function carregarStatsReais() {
+    try {
+        const s = await API.get('/stats/freelancer');
+        const set = (idx, v) => {
+            const els = document.querySelectorAll('.stat-value');
+            if (els[idx]) els[idx].textContent = v;
+        };
+        set(0, s.propostas_enviadas  || 0);
+        set(1, s.contratos_concluidos || 0);
+        const taxa = s.taxa_aceite > 0 ? s.taxa_aceite + '%' : '–';
+        set(2, taxa);
+        if (dadosPerfil.pretensao_hora) set(3, `R$ ${Math.round(dadosPerfil.pretensao_hora)}`);
+    } catch {}
 }
 
 async function carregarAvaliacoes() {
@@ -164,5 +179,6 @@ function setTab(el) { document.querySelectorAll('.profile-nav-item').forEach(i =
 document.addEventListener('DOMContentLoaded', () => {
     Sessao.exigir();
     if (Sessao.tipo !== 'freelancer') { window.location.href = 'dash_empresa.html'; return; }
+    Notif.injetar('.nav-actions');
     carregarPerfil();
 });

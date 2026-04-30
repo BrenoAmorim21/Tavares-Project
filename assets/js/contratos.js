@@ -73,9 +73,11 @@ function renderSecao(secaoId, listaId, items) {
                 <button class="btn-ct btn-ct-outline" onclick="cancelarContrato(${ct.id})">Cancelar</button>
             `;
         } else if (ct.status === 'concluido') {
-            actionsHTML = `
-                <button class="btn-ct btn-ct-primary" onclick="abrirAvaliar(${ct.id})">⭐ Avaliar</button>
-            `;
+            actionsHTML = ct.ja_avaliou
+                ? `<span style="color:#059669;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:.3rem">
+                       <span style="font-size:.95rem">⭐</span> Avaliado
+                   </span>`
+                : `<button class="btn-ct btn-ct-primary" onclick="abrirAvaliar(${ct.id})">⭐ Avaliar</button>`;
         }
 
         return `
@@ -212,10 +214,10 @@ function fecharModal(id) { document.getElementById(id)?.classList.remove('open')
 document.addEventListener('DOMContentLoaded', () => {
     Sessao.exigir();
 
-    // Ajusta link do logo baseado no tipo
     const homeLink = document.getElementById('nav-home-link');
     if (homeLink) homeLink.href = Sessao.tipo === 'empresa' ? 'dash_empresa.html' : 'home.html';
 
+    Notif.injetar('.nav-actions');
     carregarContratos();
     setInterval(carregarContratos, 30000);
 });

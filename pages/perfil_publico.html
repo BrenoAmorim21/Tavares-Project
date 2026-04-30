@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil do Freelancer — WorkFinder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#1A56DB; --brand-soft:#EBF2FF; --brand-dark:#1039A0;
+      --green:#059669; --green-soft:#D1FAE5;
+      --amber:#D97706; --amber-soft:#FEF3C7;
+      --ink:#0E1726; --ink-mid:#4A5568; --ink-light:#718096;
+      --border:#E2E8F0; --surface:#F7F9FC; --white:#fff;
+      --font:'DM Sans',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font);background:var(--surface);color:var(--ink);min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    /* Navbar */
+    .navbar{display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .nav-brand{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.1rem}
+    .nav-logo{width:32px;height:32px;background:var(--brand);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700}
+    .nav-actions{display:flex;gap:.6rem;align-items:center}
+    .btn-nav{padding:.5rem 1rem;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid transparent;font-family:var(--font);transition:all .15s}
+    .btn-nav-ghost{background:transparent;color:var(--ink-mid)}
+    .btn-nav-ghost:hover{background:var(--surface)}
+    .btn-nav-primary{background:var(--brand);color:#fff}
+    .btn-nav-primary:hover{background:var(--brand-dark)}
+
+    /* Cover */
+    .cover{height:160px;background:linear-gradient(135deg,#1A56DB 0%,#6D28D9 100%)}
+
+    /* Header */
+    .header-wrap{max-width:900px;margin:0 auto;padding:0 1.5rem}
+    .header-inner{display:flex;align-items:flex-end;gap:1.25rem;transform:translateY(-40px);margin-bottom:-20px}
+    .avatar-big{width:96px;height:96px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;border:4px solid #fff;box-shadow:0 4px 16px rgba(0,0,0,.12);flex-shrink:0}
+    .header-info{padding-bottom:.5rem}
+    .pub-nome{font-size:1.35rem;font-weight:700;line-height:1.2}
+    .pub-titulo{font-size:.9rem;color:var(--ink-mid);margin-top:.2rem}
+    .disponivel-badge{display:inline-flex;align-items:center;gap:.35rem;background:var(--green-soft);color:var(--green);font-size:.75rem;font-weight:600;padding:.2rem .65rem;border-radius:20px;margin-top:.4rem}
+    .disponivel-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+    .indisponivel{background:#F3F4F6;color:#6B7280}
+
+    /* Body */
+    .body{max-width:900px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:1fr 300px;gap:1.5rem}
+    @media(max-width:700px){.body{grid-template-columns:1fr}}
+
+    /* Seção */
+    .section{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:1.25rem;margin-bottom:1rem}
+    .section-title{font-size:.95rem;font-weight:700;margin-bottom:.9rem;color:var(--ink)}
+
+    /* Skills */
+    .pub-skill-tag{display:inline-block;background:var(--brand-soft);color:var(--brand);font-size:.78rem;font-weight:600;padding:.25rem .7rem;border-radius:20px;margin:.2rem}
+
+    /* Stats */
+    .stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--surface)}
+    .stat-row:last-child{border-bottom:none}
+    .stat-label{font-size:.82rem;color:var(--ink-mid)}
+    .stat-value{font-size:.9rem;font-weight:700;color:var(--ink)}
+    .stat-value.verde{color:var(--green)}
+    .stat-value.amber{color:var(--amber);display:flex;align-items:center;gap:.3rem}
+
+    /* Meta */
+    .meta-item{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--ink-mid);margin-bottom:.35rem}
+    .meta-icon{font-size:.9rem}
+
+    /* Bio */
+    .bio-text{font-size:.88rem;color:var(--ink-mid);line-height:1.65;white-space:pre-wrap}
+
+    /* Ação */
+    .btn-contact{width:100%;padding:.7rem;background:var(--brand);color:#fff;border:none;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .15s;margin-top:.5rem}
+    .btn-contact:hover{background:var(--brand-dark)}
+
+    /* Animação */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .star{font-size:.9rem}
+    .star-filled{color:#F59E0B}
+    .star-empty{color:#D1D5DB}
+    .stars-animated .star-filled{animation:starPop .4s ease both}
+    @keyframes starPop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="home.html" class="nav-brand">
+      <div class="nav-logo">WF</div>
+      WorkFinder
+    </a>
+    <div class="nav-actions">
+      <button class="btn-nav btn-nav-ghost" onclick="history.back()">← Voltar</button>
+      <button class="btn-nav btn-nav-primary" onclick="location.href='home.html'">Ver projetos</button>
+    </div>
+  </nav>
+
+  <div class="cover"></div>
+
+  <div class="header-wrap" id="perfil-wrap">
+    <div class="header-inner">
+      <div class="avatar-big" id="pub-avatar">WF</div>
+      <div class="header-info">
+        <div class="pub-nome" id="pub-nome">Carregando...</div>
+        <div class="pub-titulo" id="pub-titulo"></div>
+        <div class="disponivel-badge" id="pub-disponivel">
+          <span class="dot"></span> Carregando...
+        </div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <!-- Coluna principal -->
+      <div>
+        <div class="section">
+          <div class="section-title">Sobre</div>
+          <p class="bio-text" id="pub-bio">Carregando...</p>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Habilidades</div>
+          <div id="pub-skills"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Avaliações recebidas</div>
+          <div id="pub-avaliacoes">
+            <p style="color:#718096;font-size:.875rem">Carregando avaliações...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="section">
+          <div class="section-title">Informações</div>
+          <div class="meta-item"><span class="meta-icon">📍</span> <span id="pub-cidade">–</span></div>
+          <div class="meta-item"><span class="meta-icon">🔗</span>
+            <a id="pub-portfolio-link" href="#" target="_blank" style="color:var(--brand);word-break:break-all">
+              <span id="pub-portfolio">–</span>
+            </a>
+          </div>
+          <div class="meta-item" style="margin-top:.5rem"><span class="meta-icon">💰</span> <strong id="pub-pretensao">A combinar</strong></div>
+          <button class="btn-contact" onclick="location.href='home.html'">Ver projetos abertos</button>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Atividade</div>
+          <div class="stat-row">
+            <span class="stat-label">Projetos concluídos</span>
+            <span class="stat-value verde" id="pub-stat-projetos">–</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Avaliações</span>
+            <span class="stat-value" id="pub-stat-avaliacoes">–</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Nota média</span>
+            <span class="stat-value amber" id="pub-stat-nota">–</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/perfil_publico.js"></script>
+</body>
+</html>

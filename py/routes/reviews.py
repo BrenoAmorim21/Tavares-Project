@@ -66,6 +66,17 @@ def avaliar():
         conn.close()
 
 
+@reviews_bp.route('/meu-contrato/<int:contract_id>', methods=['GET'])
+@login_required
+def minha_avaliacao(contract_id):
+    """Verifica se o usuário logado já avaliou um contrato específico."""
+    row = query_one(
+        'SELECT id FROM reviews WHERE contract_id=%s AND avaliador_tipo=%s',
+        (contract_id, g.user_tipo)
+    )
+    return jsonify({'avaliado': row is not None}), 200
+
+
 @reviews_bp.route('/empresa/<int:company_id>', methods=['GET'])
 def da_empresa(company_id):
     rows = query_all('''

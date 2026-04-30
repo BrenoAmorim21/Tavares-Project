@@ -168,3 +168,19 @@ CREATE INDEX idx_ct_company ON contracts (company_id);
 CREATE INDEX idx_ct_free ON contracts (freelancer_id);
 
 CREATE INDEX idx_rev_contract ON reviews (contract_id);
+
+-- ─── NOTIFICAÇÕES ────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS notifications (
+    id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    mensagem TEXT,
+    lida TINYINT(1) NOT NULL DEFAULT 0,
+    link VARCHAR(500),
+    criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_notif_user ON notifications (user_id, lida);

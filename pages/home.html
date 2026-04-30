@@ -30,11 +30,11 @@
       <input type="text" id="search-input" placeholder="Buscar projetos, habilidades..." />
     </div>
 
-    <div class="nav-actions">
+    <div class="nav-actions" id="nav-actions-home">
       <button class="btn-nav btn-nav-ghost" onclick="window.location.href='perfil-freelancer.html'">Meu Perfil</button>
-      <button class="btn-nav btn-nav-ghost" onclick="location.href='propostas.html'">Minhas Propostas</button>
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='propostas.html'">Propostas</button>
       <button class="btn-nav btn-nav-ghost" onclick="location.href='contratos.html'">Contratos</button>
-      <div class="avatar" onclick="window.location.href='perfil-freelancer.html'" title="Ver perfil">MV</div>
+      <div class="avatar" id="avatar-home" onclick="window.location.href='perfil-freelancer.html'" title="Ver perfil">MV</div>
     </div>
   </nav>
 
@@ -71,13 +71,13 @@
           <span class="filter-label">Modalidade</span>
           <div class="filter-options">
             <label class="filter-opt">
-              <input type="checkbox" checked /> Remoto <span class="count">84</span>
+              <input type="checkbox" data-filter="modalidade" value="remoto" checked /> Remoto <span class="count" data-count-modal="remoto">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" /> Presencial <span class="count">22</span>
+              <input type="checkbox" data-filter="modalidade" value="presencial" checked /> Presencial <span class="count" data-count-modal="presencial">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" /> Híbrido <span class="count">22</span>
+              <input type="checkbox" data-filter="modalidade" value="hibrido" checked /> Híbrido <span class="count" data-count-modal="hibrido">–</span>
             </label>
           </div>
         </div>
@@ -86,13 +86,13 @@
           <span class="filter-label">Tipo</span>
           <div class="filter-options">
             <label class="filter-opt">
-              <input type="checkbox" checked /> Projeto pontual <span class="count">72</span>
+              <input type="checkbox" data-filter="tipo" value="projeto" checked /> Projeto pontual <span class="count" data-count-tipo="projeto">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" checked /> Freelance <span class="count">38</span>
+              <input type="checkbox" data-filter="tipo" value="freelance" checked /> Freelance <span class="count" data-count-tipo="freelance">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" /> Part-time <span class="count">18</span>
+              <input type="checkbox" data-filter="tipo" value="part-time" checked /> Part-time <span class="count" data-count-tipo="part-time">–</span>
             </label>
           </div>
         </div>
@@ -101,19 +101,19 @@
           <span class="filter-label">Área</span>
           <div class="filter-options">
             <label class="filter-opt">
-              <input type="checkbox" checked /> Dev Web <span class="count">51</span>
+              <input type="checkbox" data-filter="area" value="Desenvolvimento Web" checked /> Dev Web <span class="count" data-count-area="Desenvolvimento Web">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" /> Design UI/UX <span class="count">30</span>
+              <input type="checkbox" data-filter="area" value="Design Grafico / UI/UX" checked /> Design UI/UX <span class="count" data-count-area="Design Grafico / UI/UX">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" /> Mobile <span class="count">20</span>
+              <input type="checkbox" data-filter="area" value="Desenvolvimento Mobile" checked /> Mobile <span class="count" data-count-area="Desenvolvimento Mobile">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" /> Dados / BI <span class="count">15</span>
+              <input type="checkbox" data-filter="area" value="Dados / BI" checked /> Dados / BI <span class="count" data-count-area="Dados / BI">–</span>
             </label>
             <label class="filter-opt">
-              <input type="checkbox" /> Marketing <span class="count">12</span>
+              <input type="checkbox" data-filter="area" value="Marketing" checked /> Marketing <span class="count" data-count-area="Marketing">–</span>
             </label>
           </div>
         </div>
@@ -122,11 +122,11 @@
       <div class="sidebar-card">
         <div class="sidebar-title">Orçamento</div>
         <div class="filter-options">
-          <label class="filter-opt"><input type="radio" name="budget" checked /> Qualquer valor</label>
-          <label class="filter-opt"><input type="radio" name="budget" /> Até R$ 2.000</label>
-          <label class="filter-opt"><input type="radio" name="budget" /> R$ 2k – R$ 10k</label>
-          <label class="filter-opt"><input type="radio" name="budget" /> R$ 10k – R$ 30k</label>
-          <label class="filter-opt"><input type="radio" name="budget" /> Acima de R$ 30k</label>
+          <label class="filter-opt"><input type="radio" name="budget" value="0,999999" checked onchange="aplicarBudget(this)"/> Qualquer valor</label>
+          <label class="filter-opt"><input type="radio" name="budget" value="0,2000" onchange="aplicarBudget(this)"/> Até R$ 2.000</label>
+          <label class="filter-opt"><input type="radio" name="budget" value="2000,10000" onchange="aplicarBudget(this)"/> R$ 2k – R$ 10k</label>
+          <label class="filter-opt"><input type="radio" name="budget" value="10000,30000" onchange="aplicarBudget(this)"/> R$ 10k – R$ 30k</label>
+          <label class="filter-opt"><input type="radio" name="budget" value="30000,999999" onchange="aplicarBudget(this)"/> Acima de R$ 30k</label>
         </div>
       </div>
     </aside>
@@ -134,13 +134,13 @@
     <!-- Feed principal -->
     <main>
       <div class="feed-header">
-        <span class="feed-title" id="feed-count">128 projetos encontrados</span>
+        <span class="feed-title" id="feed-count">Carregando...</span>
         <div class="feed-sort">
           Ordenar por
-          <select id="sort-select">
-            <option>Mais recentes</option>
-            <option>Maior orçamento</option>
-            <option>Mais propostas</option>
+          <select id="sort-select" onchange="filtroOrdem=this.value;renderFeed()">
+            <option value="recentes">Mais recentes</option>
+            <option value="orcamento">Maior orçamento</option>
+            <option value="propostas">Menos concorrência</option>
           </select>
         </div>
       </div>

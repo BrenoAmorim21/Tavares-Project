@@ -29,7 +29,11 @@ def meus():
         rows = query_all('''
             SELECT ct.*,
                    j.titulo AS vaga_titulo, j.area,
-                   f.nome AS freelancer_nome, f.foto_url
+                   f.nome AS freelancer_nome, f.foto_url,
+                   EXISTS(
+                       SELECT 1 FROM reviews r
+                       WHERE r.contract_id = ct.id AND r.avaliador_tipo = 'empresa'
+                   ) AS ja_avaliou
             FROM contracts ct
             JOIN jobs j        ON j.id  = ct.job_id
             JOIN freelancers f ON f.id  = ct.freelancer_id
@@ -43,7 +47,11 @@ def meus():
         rows = query_all('''
             SELECT ct.*,
                    j.titulo AS vaga_titulo, j.area,
-                   c.nome_empresa, c.logo_url AS empresa_logo
+                   c.nome_empresa, c.logo_url AS empresa_logo,
+                   EXISTS(
+                       SELECT 1 FROM reviews r
+                       WHERE r.contract_id = ct.id AND r.avaliador_tipo = 'freelancer'
+                   ) AS ja_avaliou
             FROM contracts ct
             JOIN jobs j      ON j.id  = ct.job_id
             JOIN companies c ON c.id  = ct.company_id

@@ -21,11 +21,11 @@
       <div class="nav-logo">WF</div>
       WorkFinder
     </a>
-    <div class="nav-actions">
-      <button class="btn-nav btn-nav-ghost" onclick="location.href='perfil_empresa.html'">Perfil da Empresa</button>
+    <div class="nav-actions" id="nav-actions-dash">
+      <button class="btn-nav btn-nav-ghost" onclick="location.href='perfil_empresa.html'">Perfil</button>
       <button class="btn-nav btn-nav-ghost" onclick="location.href='contratos.html'">Contratos</button>
       <button class="btn-nav btn-nav-primary" onclick="location.href='pub_vaga.html'">+ Publicar projeto</button>
-      <div class="avatar" title="Lojafy Soluções">LS</div>
+      <div class="avatar" id="avatar-empresa" title="">LS</div>
       <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
     </div>
   </nav>
@@ -72,6 +72,18 @@
         <div class="stat-label">Freelancers contratados</div>
         <div class="stat-delta">Projeto em andamento</div>
       </div>
+    </div>
+
+    <!-- Gráfico de propostas por projeto -->
+    <div style="background:#fff;border-radius:14px;border:1px solid #E2E8F0;padding:1.5rem;margin-bottom:1.5rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem">
+        <div>
+          <div style="font-weight:700;font-size:1rem;color:#0E1726">Propostas por projeto</div>
+          <div style="font-size:.8rem;color:#718096;margin-top:.15rem">Distribuição dos últimos projetos publicados</div>
+        </div>
+        <div id="dash-media-nota" style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:#F59E0B;font-weight:600"></div>
+      </div>
+      <div id="chart-propostas" style="display:flex;flex-direction:column;gap:.65rem"></div>
     </div>
 
     <!-- Tabs -->

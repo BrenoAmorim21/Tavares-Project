@@ -53,3 +53,14 @@ def execute(sql, params=(), return_lastrowid=False):
     finally:
         cur.close()
         conn.close()
+
+
+def criar_notificacao(user_id, tipo, titulo, mensagem, link=None):
+    """Cria uma notificação para o usuário. Falha silenciosa para não quebrar o fluxo principal."""
+    try:
+        execute(
+            'INSERT INTO notifications (user_id, tipo, titulo, mensagem, link) VALUES (%s,%s,%s,%s,%s)',
+            (user_id, tipo, titulo, mensagem, link)
+        )
+    except Exception:
+        pass

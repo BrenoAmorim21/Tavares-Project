@@ -83,214 +83,227 @@
 
     <!-- Nav interna -->
     <div class="profile-nav">
-      <div class="profile-nav-item active" onclick="setTab(this)">Visão geral</div>
-      <div class="profile-nav-item" onclick="setTab(this)">Portfólio</div>
-      <div class="profile-nav-item" onclick="setTab(this)">Propostas</div>
-    </div>
-  </div>
-
-  <!-- Body do perfil -->
-  <div class="profile-body">
-
-    <!-- Coluna principal -->
-    <div>
-      <!-- Sobre -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Sobre</span>
-          <button class="btn-section-edit" onclick="abrirModal('modal-bio')">Editar</button>
-        </div>
-        <p class="bio-text" id="display-bio">
-          Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React. Apaixonado
-          por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de e-commerce, SaaS, IoT e
-          análise de dados. Gosto de código limpo, boa documentação e entrega dentro do prazo.
-        </p>
-      </div>
-
-      <!-- Habilidades -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Habilidades</span>
-          <button class="btn-section-edit" onclick="abrirModal('modal-skills')">Editar</button>
-        </div>
-        <div class="skills-grid" id="skills-grid">
-          <!-- renderizado via JS -->
-        </div>
-      </div>
-
-      <!-- Experiência -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Experiência</span>
-          <button class="btn-section-edit">+ Adicionar</button>
-        </div>
-        <div class="exp-item">
-          <div class="exp-logo">SC</div>
-          <div class="exp-info">
-            <div class="exp-title">Desenvolvedor Full-Stack Freelancer</div>
-            <div class="exp-company">Autônomo · Freelance</div>
-            <div class="exp-period">Jan 2022 – Presente · 3 anos</div>
-            <div class="exp-desc">Desenvolvimento de aplicações web para clientes de diversos segmentos. Projetos com
-              React, Python/Flask, MySQL e integrações com APIs de pagamento.</div>
-          </div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-logo" style="background:#EBF2FF;color:#1A56DB">TK</div>
-          <div class="exp-info">
-            <div class="exp-title">Desenvolvedor Junior</div>
-            <div class="exp-company">TechKid Soluções · CLT</div>
-            <div class="exp-period">Mar 2021 – Dez 2021 · 10 meses</div>
-            <div class="exp-desc">Manutenção e desenvolvimento de novas features em sistema ERP interno. Stack: PHP,
-              Vue.js e PostgreSQL.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Portfólio -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Portfólio</span>
-          <button class="btn-section-edit">+ Adicionar</button>
-        </div>
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <div class="portfolio-thumb" style="background:#EBF2FF">🛒</div>
-            <div class="portfolio-info">
-              <div class="portfolio-title">E-commerce Moda</div>
-              <div class="portfolio-tech">React · Node · Stripe</div>
-            </div>
-          </div>
-          <div class="portfolio-card">
-            <div class="portfolio-thumb" style="background:#D1FAE5">📊</div>
-            <div class="portfolio-info">
-              <div class="portfolio-title">Dashboard BI</div>
-              <div class="portfolio-tech">Python · Pandas · Plotly</div>
-            </div>
-          </div>
-          <div class="portfolio-card">
-            <div class="portfolio-thumb" style="background:#FEF3C7">📱</div>
-            <div class="portfolio-info">
-              <div class="portfolio-title">App de Finanças</div>
-              <div class="portfolio-tech">React Native · Firebase</div>
-            </div>
-          </div>
-          <div class="portfolio-card">
-            <div class="portfolio-thumb" style="background:#EDE9FE">🤖</div>
-            <div class="portfolio-info">
-              <div class="portfolio-title">API IoT</div>
-              <div class="portfolio-tech">Flask · MQTT · Docker</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="profile-nav-item active" onclick="setTab(this, 'visao')">Visão geral</div>
+      <div class="profile-nav-item" onclick="setTab(this, 'portfolio')">Portfólio</div>
+      <div class="profile-nav-item" onclick="location.href='propostas.html'">Propostas</div>
     </div>
 
-    <!-- Sidebar direita -->
-    <aside class="sidebar-right">
+    <!-- Body do perfil -->
+    <div class="profile-body">
 
-      <!-- Completude do perfil -->
-      <div class="section">
-        <div class="section-title" style="margin-bottom:.9rem">Completude do perfil</div>
-        <div class="completude">
-          <span class="completude-label">Progresso geral</span>
-          <span class="completude-pct">75%</span>
+      <!-- Coluna principal: contém as duas abas -->
+      <div>
+
+        <!-- Aba: Visão geral -->
+        <div id="tab-visao">
+
+          <!-- Sobre -->
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Sobre</span>
+              <button class="btn-section-edit" onclick="abrirModal('modal-bio')">Editar</button>
+            </div>
+            <p class="bio-text" id="display-bio">
+              Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React.
+              Apaixonado por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de
+              e-commerce, SaaS, IoT e análise de dados. Gosto de código limpo, boa documentação e entrega dentro do
+              prazo.
+            </p>
+          </div>
+
+          <!-- Habilidades -->
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Habilidades</span>
+              <button class="btn-section-edit" onclick="abrirModal('modal-skills')">Editar</button>
+            </div>
+            <div class="skills-grid" id="skills-grid">
+              <!-- renderizado via JS -->
+            </div>
+          </div>
+
+          <!-- Experiência -->
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Experiência</span>
+              <button class="btn-section-edit">+ Adicionar</button>
+            </div>
+            <div class="exp-item">
+              <div class="exp-logo">SC</div>
+              <div class="exp-info">
+                <div class="exp-title">Desenvolvedor Full-Stack Freelancer</div>
+                <div class="exp-company">Autônomo · Freelance</div>
+                <div class="exp-period">Jan 2022 – Presente · 3 anos</div>
+                <div class="exp-desc">Desenvolvimento de aplicações web para clientes de diversos segmentos. Projetos
+                  com React, Python/Flask, MySQL e integrações com APIs de pagamento.</div>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-logo" style="background:#EBF2FF;color:#1A56DB">TK</div>
+              <div class="exp-info">
+                <div class="exp-title">Desenvolvedor Junior</div>
+                <div class="exp-company">TechKid Soluções · CLT</div>
+                <div class="exp-period">Mar 2021 – Dez 2021 · 10 meses</div>
+                <div class="exp-desc">Manutenção e desenvolvimento de novas features em sistema ERP interno. Stack:
+                  PHP, Vue.js e PostgreSQL.</div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width:75%"></div>
+        <!-- /Aba: Visão geral -->
+
+        <!-- Aba: Portfólio -->
+        <div id="tab-portfolio" style="display:none">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Portfólio</span>
+              <button class="btn-section-edit">+ Adicionar</button>
+            </div>
+            <div class="portfolio-grid">
+              <div class="portfolio-card">
+                <div class="portfolio-thumb" style="background:#EBF2FF">🛒</div>
+                <div class="portfolio-info">
+                  <div class="portfolio-title">E-commerce Moda</div>
+                  <div class="portfolio-tech">React · Node · Stripe</div>
+                </div>
+              </div>
+              <div class="portfolio-card">
+                <div class="portfolio-thumb" style="background:#D1FAE5">📊</div>
+                <div class="portfolio-info">
+                  <div class="portfolio-title">Dashboard BI</div>
+                  <div class="portfolio-tech">Python · Pandas · Plotly</div>
+                </div>
+              </div>
+              <div class="portfolio-card">
+                <div class="portfolio-thumb" style="background:#FEF3C7">📱</div>
+                <div class="portfolio-info">
+                  <div class="portfolio-title">App de Finanças</div>
+                  <div class="portfolio-tech">React Native · Firebase</div>
+                </div>
+              </div>
+              <div class="portfolio-card">
+                <div class="portfolio-thumb" style="background:#EDE9FE">🤖</div>
+                <div class="portfolio-info">
+                  <div class="portfolio-title">API IoT</div>
+                  <div class="portfolio-tech">Flask · MQTT · Docker</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="completude-tip">💡 Adicione um link de portfólio para chegar a 100%</p>
+        <!-- /Aba: Portfólio -->
+
       </div>
+      <!-- /Coluna principal -->
 
-      <!-- Estatísticas -->
-      <div class="section">
-        <div class="section-title" style="margin-bottom:.9rem">Minha atividade</div>
-        <div class="stat-row">
-          <span class="stat-label">Propostas enviadas</span>
-          <span class="stat-value brand">3</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Projetos concluídos</span>
-          <span class="stat-value green">8</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Taxa de aceite</span>
-          <span class="stat-value">72%</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Pretensão / hora</span>
-          <span class="stat-value">R$ 120</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Membro desde</span>
-          <span class="stat-value">Abr 2025</span>
-        </div>
-      </div>
+      <!-- Sidebar direita (sempre visível, fora das abas) -->
+      <aside class="sidebar-right">
 
-      <!-- Avaliações recebidas -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Avaliações recebidas</span>
+        <!-- Completude do perfil -->
+        <div class="section">
+          <div class="section-title" style="margin-bottom:.9rem">Completude do perfil</div>
+          <div class="completude">
+            <span class="completude-label">Progresso geral</span>
+            <span class="completude-pct">75%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:75%"></div>
+          </div>
+          <p class="completude-tip">💡 Adicione um link de portfólio para chegar a 100%</p>
         </div>
-        <div id="secao-avaliacoes">
-          <p style="color:#718096;font-size:.875rem">Carregando avaliações...</p>
-        </div>
-      </div>
 
-    </aside>
-  </div>
+        <!-- Estatísticas -->
+        <div class="section">
+          <div class="section-title" style="margin-bottom:.9rem">Minha atividade</div>
+          <div class="stat-row">
+            <span class="stat-label">Propostas enviadas</span>
+            <span class="stat-value brand">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Projetos concluídos</span>
+            <span class="stat-value green">8</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Taxa de aceite</span>
+            <span class="stat-value">72%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pretensão / hora</span>
+            <span class="stat-value">R$ 120</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Membro desde</span>
+            <span class="stat-value">Abr 2025</span>
+          </div>
+        </div>
 
-  <!-- ── Modal editar perfil ── -->
-  <div class="modal-overlay" id="modal-bio" onclick="fecharModalFora(event)">
-    <div class="modal">
-      <div class="modal-title">Editar perfil</div>
-      <form onsubmit="salvarBio(event)">
-        <div class="form-group">
-          <label>Nome completo</label>
-          <input type="text" id="input-nome" value="Mateus Vieira" />
+        <!-- Avaliações recebidas -->
+        <div class="section">
+          <div class="section-header">
+            <span class="section-title">Avaliações recebidas</span>
+          </div>
+          <div id="secao-avaliacoes">
+            <p style="color:#718096;font-size:.875rem">Carregando avaliações...</p>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Título profissional</label>
-          <input type="text" id="input-titulo" value="Desenvolvedor Full-Stack · Python & React" />
-        </div>
-        <div class="form-group">
-          <label>Sobre você</label>
-          <textarea id="input-bio"
-            rows="4">Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React. Apaixonado por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de e-commerce, SaaS, IoT e análise de dados. Gosto de código limpo, boa documentação e entrega dentro do prazo.</textarea>
-        </div>
-        <div class="form-group">
-          <label>Pretensão (R$/hora)</label>
-          <input type="number" id="input-pretensao" value="120" min="0" />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-cancel" onclick="fecharModal('modal-bio')">Cancelar</button>
-          <button type="submit" class="btn-save">Salvar</button>
-        </div>
-      </form>
+
+      </aside>
+
     </div>
-  </div>
-
-  <!-- ── Modal skills ── -->
-  <div class="modal-overlay" id="modal-skills" onclick="fecharModalFora(event)">
-    <div class="modal">
-      <div class="modal-title">Editar habilidades</div>
-      <form onsubmit="salvarSkills(event)">
-        <div class="form-group">
-          <label>Habilidades (separadas por vírgula)</label>
-          <input type="text" id="input-skills"
-            value="Python, Flask, React, Node.js, MySQL, Docker, Git, REST APIs, TypeScript, Linux" />
-          <small style="font-size:.78rem;color:#718096;margin-top:.25rem;display:block">Ex: Python, React, Figma,
-            SQL</small>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-cancel" onclick="fecharModal('modal-skills')">Cancelar</button>
-          <button type="submit" class="btn-save">Salvar</button>
-        </div>
-      </form>
+    <!-- /Body do perfil -->
+    <!-- ── Modal editar perfil ── -->
+    <div class="modal-overlay" id="modal-bio" onclick="fecharModalFora(event)">
+      <div class="modal">
+        <div class="modal-title">Editar perfil</div>
+        <form onsubmit="salvarBio(event)">
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" id="input-nome" value="Mateus Vieira" />
+          </div>
+          <div class="form-group">
+            <label>Título profissional</label>
+            <input type="text" id="input-titulo" value="Desenvolvedor Full-Stack · Python & React" />
+          </div>
+          <div class="form-group">
+            <label>Sobre você</label>
+            <textarea id="input-bio"
+              rows="4">Desenvolvedor full-stack com 4 anos de experiência, especializado em Python (Flask/Django) e React. Apaixonado por construir produtos que realmente resolvem problemas. Já trabalhei em projetos de e-commerce, SaaS, IoT e análise de dados. Gosto de código limpo, boa documentação e entrega dentro do prazo.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Pretensão (R$/hora)</label>
+            <input type="number" id="input-pretensao" value="120" min="0" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="fecharModal('modal-bio')">Cancelar</button>
+            <button type="submit" class="btn-save">Salvar</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <script src="../assets/js/api.js"></script>
-  <script src="../assets/js/perfil-freelancer.js"></script>
+    <!-- ── Modal skills ── -->
+    <div class="modal-overlay" id="modal-skills" onclick="fecharModalFora(event)">
+      <div class="modal">
+        <div class="modal-title">Editar habilidades</div>
+        <form onsubmit="salvarSkills(event)">
+          <div class="form-group">
+            <label>Habilidades (separadas por vírgula)</label>
+            <input type="text" id="input-skills"
+              value="Python, Flask, React, Node.js, MySQL, Docker, Git, REST APIs, TypeScript, Linux" />
+            <small style="font-size:.78rem;color:#718096;margin-top:.25rem;display:block">Ex: Python, React, Figma,
+              SQL</small>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="fecharModal('modal-skills')">Cancelar</button>
+            <button type="submit" class="btn-save">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/perfil-freelancer.js"></script>
 </body>
 
 </html>

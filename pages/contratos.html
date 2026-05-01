@@ -29,136 +29,491 @@
             --font: 'DM Sans', sans-serif
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
-        body { font-family: var(--font); background: var(--surface); color: var(--ink); min-height: 100vh }
-        a { color: inherit; text-decoration: none }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--surface);
+            color: var(--ink);
+            min-height: 100vh
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
 
         /* ── Navbar ── */
         .navbar {
-            display: flex; align-items: center; justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: .9rem 2rem;
             background: var(--white);
             border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; z-index: 100;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .nav-brand { display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.1rem; color: var(--ink); cursor: pointer }
-        .nav-logo { width: 32px; height: 32px; background: var(--brand); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700 }
-        .nav-actions { display: flex; gap: .6rem; align-items: center }
-        .btn-nav { padding: .5rem 1rem; border-radius: 8px; font-size: .85rem; font-weight: 500; cursor: pointer; border: 1px solid transparent; font-family: var(--font); transition: all .15s }
-        .btn-nav-ghost { background: transparent; color: var(--ink-mid) }
-        .btn-nav-ghost:hover { background: var(--surface) }
-        .btn-nav-danger { background: transparent; color: var(--red); border-color: var(--red-soft) }
-        .btn-nav-danger:hover { background: var(--red-soft) }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--ink);
+            cursor: pointer
+        }
+
+        .nav-logo {
+            width: 32px;
+            height: 32px;
+            background: var(--brand);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .75rem;
+            font-weight: 700
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: .6rem;
+            align-items: center
+        }
+
+        .btn-nav {
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            font-size: .85rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-family: var(--font);
+            transition: all .15s
+        }
+
+        .btn-nav-ghost {
+            background: transparent;
+            color: var(--ink-mid)
+        }
+
+        .btn-nav-ghost:hover {
+            background: var(--surface)
+        }
+
+        .btn-nav-danger {
+            background: transparent;
+            color: var(--red);
+            border-color: var(--red-soft)
+        }
+
+        .btn-nav-danger:hover {
+            background: var(--red-soft)
+        }
 
         /* ── Page ── */
-        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem }
-        .page-title { font-size: 1.5rem; font-weight: 700; margin-bottom: .25rem }
-        .page-sub { color: var(--ink-light); font-size: .9rem; margin-bottom: 1.5rem }
+        .page-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: .25rem
+        }
+
+        .page-sub {
+            color: var(--ink-light);
+            font-size: .9rem;
+            margin-bottom: 1.5rem
+        }
 
         /* ── Banner ativo ── */
         .banner-ativo {
             background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
-            border-radius: 14px; padding: 1.5rem 1.75rem; color: #fff; margin-bottom: 1.75rem;
-            display: none; animation: fadeUp .4s ease;
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            color: #fff;
+            margin-bottom: 1.75rem;
+            display: none;
+            animation: fadeUp .4s ease;
         }
-        .banner-ativo.show { display: block }
-        .banner-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .5px; opacity: .8; margin-bottom: .5rem }
-        .banner-titulo { font-size: 1.15rem; font-weight: 600; margin-bottom: .4rem }
-        .banner-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: .85rem; opacity: .9; margin-bottom: 1rem }
-        .banner-actions { display: flex; gap: .6rem }
-        .btn-banner { padding: .55rem 1.2rem; border-radius: 8px; font-size: .85rem; font-weight: 600; cursor: pointer; border: none; font-family: var(--font); transition: all .15s }
-        .btn-banner-green { background: var(--green-soft); color: var(--green) }
-        .btn-banner-green:hover { background: #A7F3D0 }
-        .btn-banner-ghost { background: rgba(255,255,255,.15); color: #fff }
-        .btn-banner-ghost:hover { background: rgba(255,255,255,.25) }
+
+        .banner-ativo.show {
+            display: block
+        }
+
+        .banner-label {
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            opacity: .8;
+            margin-bottom: .5rem
+        }
+
+        .banner-titulo {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: .4rem
+        }
+
+        .banner-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: .85rem;
+            opacity: .9;
+            margin-bottom: 1rem
+        }
+
+        .banner-actions {
+            display: flex;
+            gap: .6rem
+        }
+
+        .btn-banner {
+            padding: .55rem 1.2rem;
+            border-radius: 8px;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: var(--font);
+            transition: all .15s
+        }
+
+        .btn-banner-green {
+            background: var(--green-soft);
+            color: var(--green)
+        }
+
+        .btn-banner-green:hover {
+            background: #A7F3D0
+        }
+
+        .btn-banner-ghost {
+            background: rgba(255, 255, 255, .15);
+            color: #fff
+        }
+
+        .btn-banner-ghost:hover {
+            background: rgba(255, 255, 255, .25)
+        }
 
         /* ── Sections ── */
-        .section-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem }
-        .section-title .count { background: var(--brand-soft); color: var(--brand); font-size: .75rem; padding: .15rem .55rem; border-radius: 20px }
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .section-title .count {
+            background: var(--brand-soft);
+            color: var(--brand);
+            font-size: .75rem;
+            padding: .15rem .55rem;
+            border-radius: 20px
+        }
 
         /* ── Contract cards ── */
         .contrato-card {
-            background: var(--white); border-radius: 12px; padding: 1.25rem; margin-bottom: .75rem;
-            border: 1px solid var(--border); transition: all .2s; animation: fadeUp .3s ease both;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: .75rem;
+            border: 1px solid var(--border);
+            transition: all .2s;
+            animation: fadeUp .3s ease both;
         }
-        .contrato-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.06); transform: translateY(-1px) }
-        .ct-head { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: .6rem }
-        .ct-titulo { font-weight: 600; font-size: .95rem }
-        .ct-parceiro { font-size: .82rem; color: var(--ink-light); margin-top: .15rem }
-        .ct-meta { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: .82rem; color: var(--ink-mid); margin-bottom: .75rem }
-        .ct-meta-item { display: flex; align-items: center; gap: .25rem }
-        .ct-actions { display: flex; gap: .5rem; flex-wrap: wrap }
 
-        .btn-ct { padding: .4rem .9rem; border-radius: 8px; font-size: .8rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; font-family: var(--font); transition: all .15s }
-        .btn-ct-green { background: var(--green-soft); color: var(--green); border-color: #A7F3D0 }
-        .btn-ct-green:hover { background: #A7F3D0 }
-        .btn-ct-primary { background: var(--brand-soft); color: var(--brand); border-color: #BFDBFE }
-        .btn-ct-primary:hover { background: #BFDBFE }
-        .btn-ct-outline { background: transparent; color: var(--ink-mid); border-color: var(--border) }
-        .btn-ct-outline:hover { background: var(--surface) }
+        .contrato-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
+            transform: translateY(-1px)
+        }
+
+        .ct-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: .6rem
+        }
+
+        .ct-titulo {
+            font-weight: 600;
+            font-size: .95rem
+        }
+
+        .ct-parceiro {
+            font-size: .82rem;
+            color: var(--ink-light);
+            margin-top: .15rem
+        }
+
+        .ct-meta {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            font-size: .82rem;
+            color: var(--ink-mid);
+            margin-bottom: .75rem
+        }
+
+        .ct-meta-item {
+            display: flex;
+            align-items: center;
+            gap: .25rem
+        }
+
+        .ct-actions {
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap
+        }
+
+        .btn-ct {
+            padding: .4rem .9rem;
+            border-radius: 8px;
+            font-size: .8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-family: var(--font);
+            transition: all .15s
+        }
+
+        .btn-ct-green {
+            background: var(--green-soft);
+            color: var(--green);
+            border-color: #A7F3D0
+        }
+
+        .btn-ct-green:hover {
+            background: #A7F3D0
+        }
+
+        .btn-ct-primary {
+            background: var(--brand-soft);
+            color: var(--brand);
+            border-color: #BFDBFE
+        }
+
+        .btn-ct-primary:hover {
+            background: #BFDBFE
+        }
+
+        .btn-ct-outline {
+            background: transparent;
+            color: var(--ink-mid);
+            border-color: var(--border)
+        }
+
+        .btn-ct-outline:hover {
+            background: var(--surface)
+        }
 
         /* ── Badges ── */
-        .badge { display: inline-flex; padding: .2rem .65rem; border-radius: 20px; font-size: .75rem; font-weight: 600 }
-        .badge-andamento { background: var(--brand-soft); color: var(--brand) }
-        .badge-concluido { background: var(--green-soft); color: var(--green) }
-        .badge-cancelado { background: var(--red-soft); color: var(--red) }
+        .badge {
+            display: inline-flex;
+            padding: .2rem .65rem;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 600
+        }
+
+        .badge-andamento {
+            background: var(--brand-soft);
+            color: var(--brand)
+        }
+
+        .badge-concluido {
+            background: var(--green-soft);
+            color: var(--green)
+        }
+
+        .badge-cancelado {
+            background: var(--red-soft);
+            color: var(--red)
+        }
 
         /* ── Empty ── */
-        .empty-state { text-align: center; padding: 3rem 1rem; color: var(--ink-light) }
-        .empty-icon { font-size: 3rem; margin-bottom: .75rem }
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--ink-light)
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: .75rem
+        }
 
         /* ── Modal ── */
         .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,.4); backdrop-filter: blur(4px);
-            display: flex; align-items: center; justify-content: center; z-index: 1000;
-            opacity: 0; pointer-events: none; transition: opacity .25s;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s;
         }
-        .modal-overlay.open { opacity: 1; pointer-events: auto }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto
+        }
+
         .modal {
-            background: var(--white); border-radius: 16px; padding: 2rem; width: 90%; max-width: 480px;
-            box-shadow: 0 12px 40px rgba(0,0,0,.15); transform: translateY(20px); transition: transform .3s;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 480px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+            transform: translateY(20px);
+            transition: transform .3s;
         }
-        .modal-overlay.open .modal { transform: translateY(0) }
-        .modal-title { font-size: 1.15rem; font-weight: 700; margin-bottom: .25rem }
-        .modal-sub { font-size: .88rem; color: var(--ink-light); margin-bottom: 1.25rem }
-        .btn-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--ink-light); position: absolute; right: 1.5rem; top: 1.5rem }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0)
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: .25rem
+        }
+
+        .modal-sub {
+            font-size: .88rem;
+            color: var(--ink-light);
+            margin-bottom: 1.25rem
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--ink-light);
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem
+        }
 
         /* ── Estrelas animadas ── */
-        #estrelas { display: flex; gap: .5rem; justify-content: center; margin: 1.25rem 0; position: relative }
+        #estrelas {
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            margin: 1.25rem 0;
+            position: relative
+        }
+
         .estrela {
-            font-size: 2.2rem; cursor: pointer; color: #D1D5DB;
+            font-size: 2.2rem;
+            cursor: pointer;
+            color: #D1D5DB;
             transition: color .15s, transform .15s, text-shadow .15s;
             user-select: none;
         }
-        .estrela:hover { transform: scale(1.15); color: #FBBF24 }
+
+        .estrela:hover {
+            transform: scale(1.15);
+            color: #FBBF24
+        }
+
         .estrela.on {
             color: #F59E0B;
             text-shadow: 0 0 12px rgba(245, 158, 11, .5), 0 0 24px rgba(245, 158, 11, .2);
             animation: starBounce .3s ease;
         }
+
         @keyframes starBounce {
-            0% { transform: scale(1) }
-            40% { transform: scale(1.35) rotate(-8deg) }
-            70% { transform: scale(0.9) rotate(4deg) }
-            100% { transform: scale(1) rotate(0) }
+            0% {
+                transform: scale(1)
+            }
+
+            40% {
+                transform: scale(1.35) rotate(-8deg)
+            }
+
+            70% {
+                transform: scale(0.9) rotate(4deg)
+            }
+
+            100% {
+                transform: scale(1) rotate(0)
+            }
         }
 
         textarea {
-            width: 100%; padding: .75rem; border: 1.5px solid var(--border); border-radius: 8px;
-            font-family: var(--font); font-size: .9rem; resize: vertical; outline: none;
+            width: 100%;
+            padding: .75rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: .9rem;
+            resize: vertical;
+            outline: none;
             transition: border-color .2s;
         }
-        textarea:focus { border-color: var(--brand) }
+
+        textarea:focus {
+            border-color: var(--brand)
+        }
 
         .btn-submit-review {
-            width: 100%; padding: .75rem; background: var(--brand); color: #fff; border: none;
-            border-radius: 10px; font-size: .95rem; font-weight: 600; cursor: pointer;
-            font-family: var(--font); transition: all .15s; margin-top: 1rem;
+            width: 100%;
+            padding: .75rem;
+            background: var(--brand);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: .95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font);
+            transition: all .15s;
+            margin-top: 1rem;
         }
-        .btn-submit-review:hover { background: var(--brand-dark) }
+
+        .btn-submit-review:hover {
+            background: var(--brand-dark)
+        }
 
         /* ── Animations ── */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: translateY(0) } }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
     </style>
 </head>
 
@@ -171,8 +526,8 @@
             WorkFinder
         </a>
         <div class="nav-actions">
-            <button class="btn-nav btn-nav-ghost" onclick="location.href='home.html'">Projetos</button>
-            <button class="btn-nav btn-nav-ghost" onclick="location.href='propostas.html'">Propostas</button>
+            <button class="btn-nav btn-nav-ghost" id="btn-nav-1"></button>
+            <button class="btn-nav btn-nav-ghost" id="btn-nav-2"></button>
             <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
         </div>
     </nav>
@@ -218,7 +573,8 @@
         <div class="empty-state" id="empty-state" style="display:none">
             <div class="empty-icon">📋</div>
             <p>Nenhum contrato encontrado ainda.</p>
-            <p style="font-size:.85rem;margin-top:.5rem">Contratos são criados quando uma empresa aceita sua proposta.</p>
+            <p style="font-size:.85rem;margin-top:.5rem">Contratos são criados quando uma empresa aceita sua proposta.
+            </p>
         </div>
     </div>
 
@@ -240,7 +596,8 @@
             <label style="font-size:.85rem;font-weight:600;color:var(--ink-mid);margin-bottom:.4rem;display:block">
                 Comentário (opcional)
             </label>
-            <textarea id="avaliar-comentario" rows="3" placeholder="Conte como foi trabalhar neste projeto..."></textarea>
+            <textarea id="avaliar-comentario" rows="3"
+                placeholder="Conte como foi trabalhar neste projeto..."></textarea>
 
             <button class="btn-submit-review" onclick="enviarAvaliacao()">Enviar avaliação</button>
         </div>

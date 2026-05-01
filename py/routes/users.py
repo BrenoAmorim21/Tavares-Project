@@ -8,7 +8,7 @@
 
 from flask import Blueprint, request, jsonify, g
 from decorators import login_required
-from db import get_conn, query_one
+from db import get_conn, query_one, query_all
 
 users_bp = Blueprint('users', __name__)
 
@@ -83,6 +83,36 @@ def atualizar():
     finally:
         cur.close()
         conn.close()
+
+@users_bp.route('/freelancers', methods=['GET'])
+def listar_freelancers():
+    """Lista freelancers para empresas explorarem. Suporta filtros de área e busca."""
+    area  = request.args.get('area')
+    busca = request.args.get('busca')
+
+    sql = '''
+        SELECT f.id, f.nome, f.area, f.experiencia, f.habilidades,
+               f.cidade, f.estado, f.pretensao_hora, f.disponivel, f.bio,
+               COALESCE(ROUND(AVG(r.nota),1), 0) AS media_nota,
+               COUNT(DISTINCT r.id)              AS total_avaliacoes,
+               COUNT(DISTINCT ct.id)             AS projetos_concluidos
+        FROM freelancers f
+        LEFT JOIN contracts ct ON ct.freelancer_id = f.id AND ct.status = 'concluido'
+        LEFT JOIN reviews    r ON r.contract_id    = ct.id AND r.avaliador_tipo = 'empresa'
+        WHERE 1=1
+    '''
+    params = []
+    if area:
+        sql += ' AND f.area = %s'
+        params.append(area)
+    if busca:
+        sql += ' AND (f.nome LIKE %s OR f.habilidades LIKE %s OR f.bio LIKE %s)'
+        like = f'%{busca}%'
+        params.extend([like, like, like])
+    sql += ' GROUP BY f.id ORDER BY f.disponivel DESC, media_nota DESC, f.atualizado_em DESC LIMIT 60'
+
+    rows = query_all(sql, tuple(params))
+    return jsonify([_serial(r) for r in rows]), 200
 
 
 @users_bp.route('/freelancer/<int:freelancer_id>', methods=['GET'])

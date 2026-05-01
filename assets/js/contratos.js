@@ -165,12 +165,12 @@ function criarConfetti() {
         conf.style.cssText = `
             position:absolute;
             width:6px;height:6px;
-            background:${colors[Math.floor(Math.random()*colors.length)]};
+            background:${colors[Math.floor(Math.random() * colors.length)]};
             border-radius:50%;
             pointer-events:none;
-            left:${50 + (Math.random()-0.5)*120}%;
+            left:${50 + (Math.random() - 0.5) * 120}%;
             top:50%;
-            animation:confettiFly ${0.6+Math.random()*0.6}s ease-out forwards;
+            animation:confettiFly ${0.6 + Math.random() * 0.6}s ease-out forwards;
             z-index:10;
         `;
         container.style.position = 'relative';
@@ -185,7 +185,7 @@ function criarConfetti() {
         s.textContent = `
             @keyframes confettiFly {
                 0% { transform: translate(0, 0) scale(1); opacity: 1; }
-                100% { transform: translate(${Math.random()>0.5?'':'-'}${20+Math.random()*40}px, -${40+Math.random()*60}px) scale(0); opacity: 0; }
+                100% { transform: translate(${Math.random() > 0.5 ? '' : '-'}${20 + Math.random() * 40}px, -${40 + Math.random() * 60}px) scale(0); opacity: 0; }
             }
         `;
         document.head.appendChild(s);
@@ -213,6 +213,16 @@ function fecharModal(id) { document.getElementById(id)?.classList.remove('open')
 
 document.addEventListener('DOMContentLoaded', () => {
     Sessao.exigir();
+    // Ajusta navbar conforme tipo de usuário
+    const b1 = document.getElementById('btn-nav-1');
+    const b2 = document.getElementById('btn-nav-2');
+    if (Sessao.tipo === 'empresa') {
+        b1.textContent = 'Dashboard'; b1.onclick = () => location.href = 'dash_empresa.html';
+        b2.textContent = 'Publicar projeto'; b2.onclick = () => location.href = 'pub_vaga.html';
+    } else {
+        b1.textContent = 'Explorar projetos'; b1.onclick = () => location.href = 'home.html';
+        b2.textContent = 'Meu perfil'; b2.onclick = () => location.href = 'perfil-freelancer.html';
+    }
 
     const homeLink = document.getElementById('nav-home-link');
     if (homeLink) homeLink.href = Sessao.tipo === 'empresa' ? 'dash_empresa.html' : 'home.html';

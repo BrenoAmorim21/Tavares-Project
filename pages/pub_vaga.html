@@ -37,17 +37,17 @@
 
     <!-- Steps -->
     <div class="steps-bar">
-      <div class="step-item active">
+      <div class="step-item active" id="step-num-1">
         <div class="step-num">1</div>
         Informações
       </div>
       <div class="step-divider"></div>
-      <div class="step-item">
+      <div class="step-item" id="step-num-2">
         <div class="step-num">2</div>
         Requisitos
       </div>
       <div class="step-divider"></div>
-      <div class="step-item">
+      <div class="step-item" id="step-num-3">
         <div class="step-num">3</div>
         Revisão
       </div>
@@ -57,141 +57,173 @@
     <div id="form-section">
       <div class="form-card">
 
-        <!-- Seção 1: Básico -->
-        <div class="form-section-title">📋 Informações básicas</div>
+        <!-- ═══ PANEL 1: Informações ═══ -->
+        <div id="step-panel-1">
 
-        <div class="form-group">
-          <label for="inp-titulo">Título do projeto *</label>
-          <input type="text" id="inp-titulo" placeholder="Ex: Desenvolvimento de e-commerce em React + Node" />
-          <div class="form-hint">Seja específico — títulos claros atraem melhores candidatos</div>
-        </div>
+          <div class="form-section-title">📋 Informações básicas</div>
 
-        <div class="form-row">
           <div class="form-group">
-            <label for="inp-tipo">Tipo de contratação *</label>
-            <select id="inp-tipo">
-              <option value="">Selecione...</option>
-              <option value="projeto">Projeto pontual</option>
-              <option value="freelance">Freelance (por hora)</option>
-              <option value="part-time">Part-time</option>
-              <option value="contrato">Contrato fixo</option>
-            </select>
+            <label for="inp-titulo">Título do projeto *</label>
+            <input type="text" id="inp-titulo" placeholder="Ex: Desenvolvimento de e-commerce em React + Node" />
+            <div class="form-hint">Seja específico — títulos claros atraem melhores candidatos</div>
           </div>
-          <div class="form-group">
-            <label for="inp-area">Área principal *</label>
-            <select id="inp-area">
-              <option value="">Selecione...</option>
-              <option>Desenvolvimento Web</option>
-              <option>Desenvolvimento Mobile</option>
-              <option>Design UI/UX</option>
-              <option>Dados / BI</option>
-              <option>Marketing Digital</option>
-              <option>DevOps / Infra</option>
-              <option>Redação / Conteúdo</option>
-              <option>Outro</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label>Modalidade *</label>
-          <div class="modal-selector">
-            <button type="button" class="modal-opt" data-modalidade="remoto" onclick="selecionarModalidade('remoto')">
-              <div class="modal-opt-icon">🌐</div>
-              <div class="modal-opt-label">Remoto</div>
-              <div class="modal-opt-desc">100% à distância</div>
-            </button>
-            <button type="button" class="modal-opt" data-modalidade="hibrido" onclick="selecionarModalidade('hibrido')">
-              <div class="modal-opt-icon">🔄</div>
-              <div class="modal-opt-label">Híbrido</div>
-              <div class="modal-opt-desc">Remoto + presencial</div>
-            </button>
-            <button type="button" class="modal-opt" data-modalidade="presencial"
-              onclick="selecionarModalidade('presencial')">
-              <div class="modal-opt-icon">🏢</div>
-              <div class="modal-opt-label">Presencial</div>
-              <div class="modal-opt-desc">No escritório</div>
-            </button>
-          </div>
-        </div>
-
-        <!-- Seção 2: Orçamento e prazo -->
-        <div class="form-section-title" style="margin-top:1.5rem">💰 Orçamento e prazo</div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="inp-orcamento-min">Orçamento mínimo (R$)</label>
-            <input type="number" id="inp-orcamento-min" placeholder="Ex: 5000" min="0" />
-          </div>
-          <div class="form-group">
-            <label for="inp-orcamento-max">Orçamento máximo (R$)</label>
-            <input type="number" id="inp-orcamento-max" placeholder="Ex: 15000" min="0" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="inp-prazo">Prazo estimado</label>
-            <select id="inp-prazo">
-              <option value="">Selecione...</option>
-              <option value="7">Até 1 semana</option>
-              <option value="21">2–4 semanas</option>
-              <option value="60">2 meses</option>
-              <option value="90">3 meses</option>
-              <option value="180">6 meses</option>
-              <option value="">A combinar</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="inp-nivel">Nível desejado</label>
-            <select id="inp-nivel">
-              <option value="">Qualquer nível</option>
-              <option>Júnior (0–2 anos)</option>
-              <option>Pleno (2–5 anos)</option>
-              <option>Sênior (5+ anos)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Seção 3: Descrição -->
-        <div class="form-section-title" style="margin-top:1.5rem">📝 Descrição do projeto</div>
-
-        <div class="form-group">
-          <label for="inp-desc">Descreva o projeto em detalhes *</label>
-          <textarea id="inp-desc" rows="7"
-            placeholder="Descreva o que precisa ser feito, as tecnologias envolvidas, o que você espera do freelancer e quais serão os entregáveis..."></textarea>
-          <div class="form-hint">Quanto mais detalhes, melhores serão as propostas que você receberá</div>
-        </div>
-
-        <!-- Seção 4: Habilidades -->
-        <div class="form-section-title" style="margin-top:1.5rem">🛠 Habilidades necessárias</div>
-
-        <div class="form-group">
-          <label for="inp-habilidades">Adicionar habilidade (pressione Enter ou vírgula)</label>
-          <div class="skill-input-wrap">
-            <input type="text" id="inp-habilidades" placeholder="Ex: React, Python, Figma..." />
-          </div>
-          <div class="skills-preview" id="skills-preview"></div>
-        </div>
-
-        <!-- Preview -->
-        <div class="preview-card">
-          <div class="preview-title">👁 Prévia do anúncio</div>
-          <div id="preview-content">
-            <div class="preview-job-title" style="color:var(--ink-light)">Preencha o formulário para ver a prévia...
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inp-tipo">Tipo de contratação *</label>
+              <select id="inp-tipo">
+                <option value="">Selecione...</option>
+                <option value="projeto">Projeto pontual</option>
+                <option value="freelance">Freelance (por hora)</option>
+                <option value="part-time">Part-time</option>
+                <option value="contrato">Contrato fixo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inp-area">Área principal</label>
+              <select id="inp-area">
+                <option value="">Selecione...</option>
+                <option>Desenvolvimento Web</option>
+                <option>Desenvolvimento Mobile</option>
+                <option>Design UI/UX</option>
+                <option>Dados / BI</option>
+                <option>Marketing Digital</option>
+                <option>DevOps / Infra</option>
+                <option>Redação / Conteúdo</option>
+                <option>Outro</option>
+              </select>
             </div>
           </div>
+
+          <div class="form-group">
+            <label>Modalidade *</label>
+            <div class="modal-selector">
+              <button type="button" class="modal-opt" data-modalidade="remoto" onclick="selecionarModalidade('remoto')">
+                <div class="modal-opt-icon">🌐</div>
+                <div class="modal-opt-label">Remoto</div>
+                <div class="modal-opt-desc">100% à distância</div>
+              </button>
+              <button type="button" class="modal-opt" data-modalidade="hibrido"
+                onclick="selecionarModalidade('hibrido')">
+                <div class="modal-opt-icon">🔄</div>
+                <div class="modal-opt-label">Híbrido</div>
+                <div class="modal-opt-desc">Remoto + presencial</div>
+              </button>
+              <button type="button" class="modal-opt" data-modalidade="presencial"
+                onclick="selecionarModalidade('presencial')">
+                <div class="modal-opt-icon">🏢</div>
+                <div class="modal-opt-label">Presencial</div>
+                <div class="modal-opt-desc">No escritório</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-section-title" style="margin-top:1.5rem">📝 Descrição do projeto</div>
+
+          <div class="form-group">
+            <label for="inp-desc">Descreva o projeto em detalhes *</label>
+            <textarea id="inp-desc" rows="7"
+              placeholder="Descreva o que precisa ser feito, as tecnologias envolvidas, o que você espera do freelancer e quais serão os entregáveis..."></textarea>
+            <div class="form-hint">Quanto mais detalhes, melhores serão as propostas que você receberá</div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-back-form" onclick="location.href='dash_empresa.html'">← Cancelar</button>
+            <div style="display:flex;gap:.75rem">
+              <button class="btn-draft" onclick="salvarRascunho()">Salvar rascunho</button>
+              <button class="btn-publish" onclick="irParaStep(2)">Próximo →</button>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Ações -->
-        <div class="form-actions">
-          <button class="btn-back-form" onclick="location.href='dash_empresa.html'">← Cancelar</button>
-          <div style="display:flex;gap:.75rem">
-            <button class="btn-draft" onclick="salvarRascunho()">Salvar rascunho</button>
-            <button class="btn-publish" onclick="publicarVaga()">
-              🚀 Publicar projeto
-            </button>
+        <!-- ═══ PANEL 2: Requisitos (opcional) ═══ -->
+        <div id="step-panel-2" style="display:none">
+
+          <p
+            style="font-size:.875rem;color:var(--ink-light);margin-bottom:1rem;padding:.75rem 1rem;background:#F7F9FC;border-radius:8px;border-left:3px solid var(--brand)">
+            💡 Todos os campos abaixo são <strong>opcionais</strong> — quanto mais preencher, melhores serão as
+            propostas.
+          </p>
+
+          <div class="form-section-title">💰 Orçamento e prazo</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inp-orcamento-min">Orçamento mínimo (R$)</label>
+              <input type="number" id="inp-orcamento-min" placeholder="Ex: 5000" min="0" />
+            </div>
+            <div class="form-group">
+              <label for="inp-orcamento-max">Orçamento máximo (R$)</label>
+              <input type="number" id="inp-orcamento-max" placeholder="Ex: 15000" min="0" />
+            </div>
           </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inp-prazo">Prazo estimado</label>
+              <select id="inp-prazo">
+                <option value="">A combinar</option>
+                <option value="7">Até 1 semana</option>
+                <option value="21">2–4 semanas</option>
+                <option value="60">2 meses</option>
+                <option value="90">3 meses</option>
+                <option value="180">6 meses</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inp-nivel">Nível desejado</label>
+              <select id="inp-nivel">
+                <option value="">Qualquer nível</option>
+                <option>Júnior (0–2 anos)</option>
+                <option>Pleno (2–5 anos)</option>
+                <option>Sênior (5+ anos)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-section-title" style="margin-top:1.5rem">🛠 Habilidades necessárias</div>
+
+          <div class="form-group">
+            <label for="inp-habilidades">Adicionar habilidade (pressione Enter ou vírgula)</label>
+            <div class="skill-input-wrap">
+              <input type="text" id="inp-habilidades" placeholder="Ex: React, Python, Figma..." />
+            </div>
+            <div class="skills-preview" id="skills-preview"></div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-back-form" onclick="irParaStep(1)">← Voltar</button>
+            <div style="display:flex;gap:.75rem">
+              <button class="btn-draft" onclick="salvarRascunho()">Salvar rascunho</button>
+              <button class="btn-publish" onclick="irParaStep(3)">Próximo →</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ═══ PANEL 3: Revisão ═══ -->
+        <div id="step-panel-3" style="display:none">
+
+          <div class="form-section-title">👁 Revisão final</div>
+          <p style="color:var(--ink-light);font-size:.875rem;margin-bottom:1.25rem">
+            Confira como seu projeto vai aparecer para os freelancers. Se algo estiver errado, volte e ajuste.
+          </p>
+
+          <div class="preview-card">
+            <div id="preview-content">
+              <div class="preview-job-title" style="color:var(--ink-light)">Carregando prévia...</div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-back-form" onclick="irParaStep(2)">← Voltar</button>
+            <div style="display:flex;gap:.75rem">
+              <button class="btn-draft" onclick="salvarRascunho()">Salvar rascunho</button>
+              <button class="btn-publish" onclick="publicarVaga()">🚀 Publicar projeto</button>
+            </div>
+          </div>
+
         </div>
 
       </div>

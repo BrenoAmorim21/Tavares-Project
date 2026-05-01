@@ -136,3 +136,33 @@ async function publicarVaga() {
 function salvarRascunho() {
     toast('Rascunho salvo localmente!', 'info');
 }
+
+function irParaStep(n) {
+    // Valida passo 1 antes de avançar
+    if (n >= 2) {
+        const titulo = document.getElementById('inp-titulo')?.value?.trim();
+        const desc = document.getElementById('inp-desc')?.value?.trim();
+        const tipo = document.getElementById('inp-tipo')?.value;
+        if (!titulo || !desc || !tipo) {
+            toast('Preencha título, descrição e tipo de contratação antes de avançar.', 'info');
+            return;
+        }
+    }
+
+    // Mostra/esconde panels e atualiza visual do stepper
+    for (let i = 1; i <= 3; i++) {
+        const panel = document.getElementById(`step-panel-${i}`);
+        const num = document.getElementById(`step-num-${i}`);
+        if (panel) panel.style.display = i === n ? '' : 'none';
+        if (num) {
+            num.classList.remove('active', 'done');
+            if (i === n) num.classList.add('active');
+            else if (i < n) num.classList.add('done');
+        }
+    }
+
+    // Quando chega na revisão, atualiza o preview com os valores atuais
+    if (n === 3) atualizarPreview();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}

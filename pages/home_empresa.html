@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encontrar freelancers — WorkFinder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/home.css" />
+    <style>
+        .freelancer-card {
+            background: #fff;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all .15s;
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+        }
+
+        .freelancer-card:hover {
+            border-color: #1A56DB;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 86, 219, .08);
+        }
+
+        .free-head {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        .free-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #EBF2FF;
+            color: #1A56DB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: .9rem;
+            flex-shrink: 0;
+        }
+
+        .free-name {
+            font-weight: 600;
+            font-size: .95rem;
+            color: #0F172A;
+        }
+
+        .free-area {
+            font-size: .8rem;
+            color: #718096;
+        }
+
+        .free-bio {
+            font-size: .85rem;
+            color: #4A5568;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .free-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .35rem;
+        }
+
+        .free-skill {
+            background: #F7F9FC;
+            color: #4A5568;
+            border: 1px solid #E2E8F0;
+            padding: .2rem .55rem;
+            border-radius: 6px;
+            font-size: .72rem;
+        }
+
+        .free-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: .75rem;
+            border-top: 1px solid #F1F5F9;
+            font-size: .82rem;
+        }
+
+        .free-rate {
+            font-weight: 600;
+            color: #0F172A;
+        }
+
+        .free-rating {
+            color: #F59E0B;
+        }
+
+        .badge-disponivel {
+            background: #D1FAE5;
+            color: #065F46;
+            padding: .2rem .55rem;
+            border-radius: 999px;
+            font-size: .7rem;
+            font-weight: 500;
+        }
+
+        .badge-indisponivel {
+            background: #F1F5F9;
+            color: #64748B;
+            padding: .2rem .55rem;
+            border-radius: 999px;
+            font-size: .7rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="dash_empresa.html" class="nav-brand">
+            <div class="nav-logo">WF</div>
+            WorkFinder
+        </a>
+
+        <div class="nav-search">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z" />
+            </svg>
+            <input type="text" id="search-input" placeholder="Buscar por nome, habilidade..." />
+        </div>
+
+        <div class="nav-actions">
+            <button class="btn-nav btn-nav-ghost" onclick="location.href='dash_empresa.html'">Dashboard</button>
+            <button class="btn-nav btn-nav-ghost" onclick="location.href='contratos.html'">Contratos</button>
+            <button class="btn-nav btn-nav-primary" onclick="location.href='pub_vaga.html'">+ Publicar projeto</button>
+            <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
+        </div>
+    </nav>
+
+    <!-- Layout -->
+    <div class="main-layout">
+
+        <!-- Sidebar de filtros -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title">Filtros</div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Área</span>
+                    <div class="filter-options">
+                        <label class="filter-opt"><input type="radio" name="area-filter" value="" checked />
+                            Todas</label>
+                        <label class="filter-opt"><input type="radio" name="area-filter" value="Desenvolvimento Web" />
+                            Dev Web</label>
+                        <label class="filter-opt"><input type="radio" name="area-filter"
+                                value="Desenvolvimento Mobile" /> Mobile</label>
+                        <label class="filter-opt"><input type="radio" name="area-filter"
+                                value="Design Grafico / UI/UX" /> Design UI/UX</label>
+                        <label class="filter-opt"><input type="radio" name="area-filter" value="Dados / BI" /> Dados /
+                            BI</label>
+                        <label class="filter-opt"><input type="radio" name="area-filter" value="Marketing Digital" />
+                            Marketing</label>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Feed -->
+        <main>
+            <div class="feed-header">
+                <span class="feed-title" id="feed-count">Carregando...</span>
+            </div>
+
+            <div class="project-grid" id="freelancer-grid"></div>
+        </main>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/home_empresa.js"></script>
+</body>
+
+</html>

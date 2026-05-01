@@ -147,6 +147,16 @@ function fecharModal(id) { document.getElementById(id)?.classList.remove('open')
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!Sessao.token || Sessao.token === 'demo-token') {
+    // Ajusta navbar conforme tipo de usuário
+    const b1 = document.getElementById('btn-nav-1');
+    const b2 = document.getElementById('btn-nav-2');
+    if (Sessao.tipo === 'empresa') {
+      b1.textContent = 'Dashboard'; b1.onclick = () => location.href = 'dash_empresa.html';
+      b2.textContent = 'Publicar projeto'; b2.onclick = () => location.href = 'pub_vaga.html';
+    } else {
+      b1.textContent = 'Explorar projetos'; b1.onclick = () => location.href = 'home.html';
+      b2.textContent = 'Meu perfil'; b2.onclick = () => location.href = 'perfil-freelancer.html';
+    }
     document.getElementById('prop-list').innerHTML =
       '<p style="text-align:center;padding:2rem">Faça login real para ver suas propostas.</p>';
     return;

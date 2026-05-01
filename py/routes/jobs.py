@@ -68,9 +68,9 @@ def listar():
     if tipo:
         sql += ' AND j.tipo = %s';        params.append(tipo)
     if busca:
-        sql += ' AND (j.titulo LIKE %s OR j.habilidades LIKE %s)'
+        sql += ' AND (LOWER(j.titulo) LIKE LOWER(%s) OR LOWER(j.habilidades) LIKE LOWER(%s))'
         like = f'%{busca}%'
-        params += [like, like]
+        params.extend([like, like])
 
     sql += ' GROUP BY j.id'
     order_map = {

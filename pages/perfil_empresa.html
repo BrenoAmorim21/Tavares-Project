@@ -75,9 +75,9 @@
 
     <!-- Nav interna -->
     <div class="company-nav">
-      <div class="company-nav-item active" onclick="setTab(this)">Visão geral</div>
-      <div class="company-nav-item" onclick="setTab(this)">Projetos</div>
-      <div class="company-nav-item" onclick="setTab(this)">Avaliações</div>
+      <div class="company-nav-item active" onclick="setTab(this, 'visao')">Visão geral</div>
+      <div class="company-nav-item" onclick="setTab(this, 'projetos')">Projetos</div>
+      <div class="company-nav-item" onclick="setTab(this, 'avaliacoes')">Avaliações</div>
     </div>
   </div>
 
@@ -85,39 +85,49 @@
   <div class="company-body">
 
     <!-- Coluna principal -->
+    <!-- Coluna principal -->
     <div>
 
-      <!-- Sobre -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Sobre a empresa</span>
-          <button class="btn-edit" style="padding:.3rem .75rem;font-size:.8rem"
-            onclick="abrirModal('modal-edit')">Editar</button>
+      <!-- Aba: Visão geral -->
+      <div id="tab-visao">
+        <div class="section">
+          <div class="section-header">
+            <span class="section-title">Sobre a empresa</span>
+            <button class="btn-edit" style="padding:.3rem .75rem;font-size:.8rem"
+              onclick="abrirModal('modal-edit')">Editar</button>
+          </div>
+          <p id="display-desc-empresa" style="font-size:.9rem;color:var(--ink-mid);line-height:1.7">
+            A Lojafy é uma startup focada em criar soluções digitais para varejistas que querem crescer online. Fundada
+            em
+            2021, já ajudamos mais de 50 empresas a digitalizar suas operações. Temos um time enxuto e valorizamos muito
+            a
+            parceria com freelancers especializados para projetos pontuais.
+          </p>
         </div>
-        <p id="display-desc-empresa" style="font-size:.9rem;color:var(--ink-mid);line-height:1.7">
-          A Lojafy é uma startup focada em criar soluções digitais para varejistas que querem crescer online. Fundada em
-          2021, já ajudamos mais de 50 empresas a digitalizar suas operações. Temos um time enxuto e valorizamos muito a
-          parceria com freelancers especializados para projetos pontuais.
-        </p>
       </div>
 
-      <!-- Projetos ativos (carregado via JS) -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Projetos publicados</span>
-          <button class="btn-pub" style="padding:.35rem .85rem;font-size:.8rem"
-            onclick="location.href='pub_vaga.html'">+ Novo</button>
+      <!-- Aba: Projetos -->
+      <div id="tab-projetos" style="display:none">
+        <div class="section">
+          <div class="section-header">
+            <span class="section-title">Projetos publicados</span>
+            <button class="btn-pub" style="padding:.35rem .85rem;font-size:.8rem"
+              onclick="location.href='pub_vaga.html'">+ Novo</button>
+          </div>
+          <p style="color:var(--ink-light);font-size:.875rem">Carregando projetos...</p>
         </div>
-        <p style="color:var(--ink-light);font-size:.875rem">Carregando projetos...</p>
       </div>
 
-      <!-- Avaliações (carregado via JS) -->
-      <div class="section">
-        <div class="section-header">
-          <span class="section-title">Avaliações de freelancers</span>
+      <!-- Aba: Avaliações -->
+      <div id="tab-avaliacoes" style="display:none">
+        <div class="section">
+          <div class="section-header">
+            <span class="section-title">Avaliações de freelancers</span>
+          </div>
+          <p style="color:var(--ink-light);font-size:.875rem">Carregando avaliações...</p>
         </div>
-        <p style="color:var(--ink-light);font-size:.875rem">Carregando avaliações...</p>
       </div>
+
     </div>
 
     <!-- Sidebar direita -->

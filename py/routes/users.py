@@ -106,7 +106,7 @@ def listar_freelancers():
         sql += ' AND f.area = %s'
         params.append(area)
     if busca:
-        sql += ' AND (f.nome LIKE %s OR f.habilidades LIKE %s OR f.bio LIKE %s)'
+        sql += ' AND (LOWER(f.nome) LIKE LOWER(%s) OR LOWER(f.habilidades) LIKE LOWER(%s) OR LOWER(f.bio) LIKE LOWER(%s))'
         like = f'%{busca}%'
         params.extend([like, like, like])
     sql += ' GROUP BY f.id ORDER BY f.disponivel DESC, media_nota DESC, f.atualizado_em DESC LIMIT 60'

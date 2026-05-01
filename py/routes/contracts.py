@@ -7,7 +7,7 @@
 from flask import Blueprint, request, jsonify, g
 import datetime
 from decorators import login_required
-from db import get_conn, query_one, query_all
+from db import get_conn, query_one, query_all, criar_notificacao
 
 contracts_bp = Blueprint('contracts', __name__)
 
@@ -84,6 +84,26 @@ def mudar_status(ct_id):
         if novo == 'concluido':
             cur.execute("UPDATE jobs SET status='concluida' WHERE id=%s", (contrato['job_id'],))
         conn.commit()
+        # Notifica o outro lado sobre a mudança de status
+        if novo == 'concluido':
+            info = query_one('''
+                SELECT j.titulo, c.user_id AS empresa_uid, f.user_id AS free_uid
+                FROM contracts ct
+                JOIN jobs j        ON j.id = ct.job_id
+                JOIN companies c   ON c.id = ct.company_id
+                JOIN freelancers f ON f.id = ct.freelancer_id
+                WHERE ct.id = %s
+            ''', (ct_id,))
+            if info:
+                # Notifica ambos os lados — quem concluiu e quem precisa avaliar
+                criar_notificacao(info['empresa_uid'], 'contrato_concluido',
+                    'Contrato concluído ✅',
+                    f'O contrato "{info["titulo"]}" foi marcado como concluído. Avalie o freelancer agora!',
+                    'contratos.html')
+                criar_notificacao(info['free_uid'], 'contrato_concluido',
+                    'Contrato concluído ✅',
+                    f'O contrato "{info["titulo"]}" foi marcado como concluído. Avalie a empresa agora!',
+                    'contratos.html')
         return jsonify({'mensagem': f'Contrato marcado como {novo}.'}), 200
     except Exception as e:
         conn.rollback()

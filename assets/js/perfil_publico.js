@@ -121,4 +121,13 @@ function renderAvaliacoes() {
 document.addEventListener('DOMContentLoaded', () => {
     Sessao.exigir();
     carregar();
+    const btnNav = document.getElementById('pp-btn-nav');
+    const btnCta = document.getElementById('pp-btn-cta');
+    if (Sessao.tipo === 'empresa') {
+        if (btnNav) { btnNav.textContent = 'Buscar freelancers'; btnNav.onclick = () => location.href = 'home_empresa.html'; }
+        if (btnCta) { btnCta.textContent = 'Voltar à busca'; btnCta.onclick = () => location.href = 'home_empresa.html'; }
+    } else {
+        if (btnNav) { btnNav.textContent = 'Ver projetos'; btnNav.onclick = () => location.href = 'home.html'; }
+        if (btnCta) { btnCta.textContent = 'Ver projetos abertos'; btnCta.onclick = () => location.href = 'home.html'; }
+    }
 });

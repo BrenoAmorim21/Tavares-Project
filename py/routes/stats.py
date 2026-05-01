@@ -98,6 +98,9 @@ def stats_freelancer():
     ace = result.get('propostas_aceitas', 0)
     result['taxa_aceite'] = round((ace / env * 100) if env > 0 else 0, 1)
 
+    return jsonify(result), 200
+
+
 @stats_bp.route('/plataforma', methods=['GET'])
 def stats_plataforma():
     row = query_one('''
@@ -111,5 +114,3 @@ def stats_plataforma():
         'novos_semana':  int(row['novos_semana']  or 0),
         'media_hora':    int(row['media_hora']    or 0),
     }), 200
-
-    return jsonify(result), 200

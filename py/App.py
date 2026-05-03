@@ -23,9 +23,10 @@ app.register_blueprint(users_bp,     url_prefix='/api/usuarios')
 app.register_blueprint(stats_bp,     url_prefix='/api/stats')
 app.register_blueprint(notif_bp,     url_prefix='/api/notificacoes')
 
-@app.route('/api/ping')
-def ping():
-    return {'status': 'ok', 'mensagem': 'WorkFinder API rodando'}
+@app.route('/')
+def home():
+    return send_from_directory(ROOT, 'index.html')
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+@app.route('/<path:path>')
+def static_proxy(path):
+    ...

@@ -177,7 +177,9 @@ const Notif = {
         painel = document.createElement('div');
         painel.id = 'notif-painel';
         painel.style.cssText = `
-            position:absolute;top:calc(100% + 8px);right:0;width:340px;max-height:420px;
+            position:absolute;top:calc(100% + 8px);right:0;
+            width:min(340px, calc(100vw - 24px));
+            max-height:420px;
             background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,.18);
             border:1px solid #E2E8F0;z-index:9999;overflow:hidden;
             animation:slideIn .2s ease;

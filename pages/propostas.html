@@ -590,6 +590,26 @@
                 transform: translateY(0)
             }
         }
+
+        /* ============ MOBILE ============ */
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+            }
+
+            body>*,
+            main,
+            .container,
+            .page-wrap {
+                max-width: 100%;
+            }
+
+            body>* {
+                min-width: 0;
+            }
+        }
     </style>
 </head>
 

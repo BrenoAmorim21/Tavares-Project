@@ -694,6 +694,86 @@
             font-size: .7rem;
             margin-left: .25rem;
         }
+
+        /* ============ MOBILE ============ */
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            body>*,
+            main {
+                max-width: 100%;
+                min-width: 0;
+            }
+
+            .navbar {
+                padding: .75rem 1rem;
+                flex-wrap: wrap;
+                gap: .5rem;
+            }
+
+            .nav-brand {
+                font-size: 1rem;
+            }
+
+            .nav-actions {
+                display: none;
+                position: fixed;
+                top: 56px;
+                left: 0;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 1rem;
+                gap: .5rem;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+                z-index: 100;
+                border-top: 1px solid #E2E8F0;
+            }
+
+            .nav-actions.open {
+                display: flex;
+            }
+
+            .nav-actions .btn-nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-hamburger {
+                display: flex !important;
+                background: transparent;
+                border: 0;
+                cursor: pointer;
+                padding: .5rem;
+                font-size: 1.5rem;
+                color: var(--ink, #0F172A);
+                margin-left: auto;
+            }
+
+            /* Modais nunca estouram */
+            .modal-overlay {
+                left: 0 !important;
+                right: 0 !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                box-sizing: border-box;
+            }
+
+            .modal-overlay>* {
+                max-width: calc(100vw - 32px);
+                box-sizing: border-box;
+            }
+        }
+
+        /* Esconde o hamburger no desktop */
+        .nav-hamburger {
+            display: none;
+        }
     </style>
 </head>
 
@@ -705,7 +785,11 @@
             <div class="nav-logo">WF</div>
             WorkFinder
         </a>
+        <button class="nav-hamburger" onclick="document.querySelector('.nav-actions').classList.toggle('open')"
+            aria-label="Menu">☰</button>
         <div class="nav-actions">
+            <button class="nav-hamburger" onclick="document.querySelector('.nav-actions').classList.toggle('open')"
+                aria-label="Menu">☰</button>
             <button class="btn-nav btn-nav-ghost" id="btn-nav-1"></button>
             <button class="btn-nav btn-nav-ghost" id="btn-nav-2"></button>
             <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>

@@ -1,5 +1,5 @@
-﻿import os
-from flask import Flask, send_from_directory, redirect
+import os
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from config import Config
 from routes.auth import auth_bp

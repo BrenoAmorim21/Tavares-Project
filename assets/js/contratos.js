@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeLink = document.getElementById('nav-home-link');
     if (homeLink) homeLink.href = Sessao.tipo === 'empresa' ? 'dash_empresa.html' : 'home.html';
 
-    Notif.injetar('.nav-actions');
+    Notif.injetar('#nav-notif-slot');
     carregarContratos();
     setInterval(carregarContratos, 30000);
 });

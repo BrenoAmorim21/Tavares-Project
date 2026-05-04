@@ -781,17 +781,16 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <a id="nav-home-link" href="home.html" class="nav-brand">
+        <a href="home.html" class="nav-brand" id="nav-home-link">
             <div class="nav-logo">WF</div>
             WorkFinder
         </a>
+        <div id="nav-notif-slot" style="display:flex;align-items:center;margin-left:auto"></div>
         <button class="nav-hamburger" onclick="document.querySelector('.nav-actions').classList.toggle('open')"
             aria-label="Menu">☰</button>
         <div class="nav-actions">
-            <button class="nav-hamburger" onclick="document.querySelector('.nav-actions').classList.toggle('open')"
-                aria-label="Menu">☰</button>
-            <button class="btn-nav btn-nav-ghost" id="btn-nav-1"></button>
-            <button class="btn-nav btn-nav-ghost" id="btn-nav-2"></button>
+            <button class="btn-nav btn-nav-ghost" onclick="location.href='home.html'">Projetos</button>
+            <button class="btn-nav btn-nav-ghost" onclick="location.href='propostas.html'">Propostas</button>
             <button class="btn-nav btn-nav-danger" onclick="sair()">Sair</button>
         </div>
     </nav>
